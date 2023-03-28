@@ -14,7 +14,7 @@ function About() {
             />
           </div>
           <div className=' bg-[#22222225] max-w-[470px] max-h-[500px] h-[80vh] md:w-[50vw] w-[70vw] rounded-2xl'></div>
-          <div className='absolute z-10 left-10 top-10 '>
+          <div className='absolute left-10 top-10 '>
             <Image
               src={content1}
               alt='Siswa Sedang Berbaris di Lapangan Upacara'

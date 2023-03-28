@@ -3,6 +3,7 @@ import HeaderComponent from '@/components/LandingPage/HeaderComponent'
 import Ppdb from '@/components/LandingPage/Ppdb'
 import Program from '@/components/LandingPage/Program'
 import Stat from '@/components/LandingPage/Stat'
+import VisiMisi from '@/components/LandingPage/VisiMisi'
 import SocialMedia from '@/components/Navbar/SocialMedia'
 
 export default function LandingPage() {
@@ -14,6 +15,7 @@ export default function LandingPage() {
       <Stat />
       <Program />
       <Ppdb />
+      <VisiMisi />
     </>
   )
 }

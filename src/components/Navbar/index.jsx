@@ -20,7 +20,7 @@ function Navbar() {
   return (
     <>
       <div
-        className={`absolute z-10  hidden md:block w-full px-8 transition duration-300 ease-in-out bg-transparent`}
+        className={`absolute z-[1000]  hidden md:block w-full px-8 transition duration-300 ease-in-out bg-transparent`}
       >
         <div className='py-4 flex max-w-7xl lg:mx-auto justify-between  items-center '>
           <h3 className='text-3xl italic text-white font-bold tracking-wide'>
