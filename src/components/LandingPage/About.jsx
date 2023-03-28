@@ -3,7 +3,7 @@ import React from 'react'
 import content1 from '../../assets/images/content-1.jpg'
 function About() {
   return (
-    <div className='mt-14 mb-24 px-10  max-w-7xl w-full mx-auto'>
+    <div className='mt-14 mb-20 px-10  max-w-7xl w-full mx-auto'>
       <div className='flex flex-col md:flex-row mx-auto'>
         <div className='w-1/2 gap-10 relative'>
           <div className='absolute top-0 left-0'>
