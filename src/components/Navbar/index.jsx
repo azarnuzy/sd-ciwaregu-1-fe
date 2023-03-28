@@ -20,9 +20,7 @@ function Navbar() {
   return (
     <>
       <div
-        className={`absolute z-10  hidden md:block w-full px-8 transition duration-300 ease-in-out ${
-          position > 0 ? 'bg-light-dark' : 'bg-transparent'
-        }`}
+        className={`absolute z-10  hidden md:block w-full px-8 transition duration-300 ease-in-out bg-transparent`}
       >
         <div className='py-4 flex max-w-7xl lg:mx-auto justify-between  items-center '>
           <h3 className='text-3xl italic text-white font-bold tracking-wide'>
@@ -49,16 +47,14 @@ function Navbar() {
       </div>
       <div
         className={`${
-          isActive ? 'absolute' : 'hidden'
+          isActive ? 'fixed' : 'hidden'
         } w-full h-screen z-10 bg-light-dark transition duration-300 opacity-30 top-0 left-0`}
         onClick={() => {
           setIsActive(() => false)
         }}
       ></div>
       <div
-        className={`z-10 absolute w-full top-4 md:hidden transition duration-300 ease-in-out ${
-          position > 0 ? 'bg-light-dark' : 'bg-transparent'
-        }`}
+        className={`z-10 absolute w-full top-4 md:hidden transition duration-300 ease-in-out bg-transparent`}
       >
         <div className='flex justify-between px-8'>
           <h3 className='text-3xl italic text-white font-bold tracking-wide'>

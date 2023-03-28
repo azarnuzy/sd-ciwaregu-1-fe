@@ -3,7 +3,7 @@ import React from 'react'
 export default function SocialMedia() {
   return (
     <div className='w-full  hidden sm:block bg-[#222]'>
-      <div className='mx-8 py-4 flex justify-between lg:mx-auto max-w-7xl text-white'>
+      <div className='mx-8 py-4 lg:px-8 flex justify-between lg:mx-auto max-w-7xl text-white'>
         <div className='flex gap-4'>
           <div className='flex gap-1 items-center'>
             <svg
