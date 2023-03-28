@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer/Footer'
 import About from '@/components/LandingPage/About'
 import Gallery from '@/components/LandingPage/Gallery'
 import HeaderComponent from '@/components/LandingPage/HeaderComponent'
@@ -18,6 +19,7 @@ export default function LandingPage() {
       <Ppdb />
       <VisiMisi />
       <Gallery />
+      <Footer />
     </>
   )
 }

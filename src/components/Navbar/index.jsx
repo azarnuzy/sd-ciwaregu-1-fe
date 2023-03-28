@@ -64,7 +64,7 @@ function Navbar() {
             onClick={() => {
               setIsActive((isActive) => !isActive)
             }}
-            className='min-h-fit min-w-fit'
+            className='min-h-fit min-w-fit cursor-pointer'
           >
             <svg
               class='h-8 w-8 text-white'
@@ -92,7 +92,7 @@ function Navbar() {
                 SDN Ciwaregu
               </h3>
             </div>
-            <div className='rounded-full bg-[#41444b] p-1 '>
+            <div className='rounded-full bg-[#41444b] p-1 cursor-pointer'>
               <div
                 className='text-2xl flex items-center  font-black'
                 onClick={() => {
