@@ -4,7 +4,7 @@ import content6 from '../../assets/images/content-6.jpg'
 
 function Ppdb() {
   return (
-    <div className='w-full max-w-7xl bg-[#CCCBD3]'>
+    <div className='w-full  bg-[#CCCBD3]'>
       <div className='w-full flex flex-col md:pt-0 pt-10 md:flex-row md:pl-10 lg:pr-10'>
         <div className='w-full pb-10 md:pb-0 md:w-2/3 flex flex-col gap-4 justify-center px-[5vw]'>
           <h2 className='font-extralight text-2xl'>

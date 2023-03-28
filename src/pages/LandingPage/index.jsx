@@ -1,4 +1,5 @@
 import About from '@/components/LandingPage/About'
+import Gallery from '@/components/LandingPage/Gallery'
 import HeaderComponent from '@/components/LandingPage/HeaderComponent'
 import Ppdb from '@/components/LandingPage/Ppdb'
 import Program from '@/components/LandingPage/Program'
@@ -16,6 +17,7 @@ export default function LandingPage() {
       <Program />
       <Ppdb />
       <VisiMisi />
+      <Gallery />
     </>
   )
 }
