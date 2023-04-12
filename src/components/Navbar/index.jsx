@@ -21,19 +21,19 @@ function Navbar() {
           </h3>
           <ul className='flex list-none gap-4 md:gap-5 lg:gap-8 text-white uppercase items-center font-semibold'>
             <li>
-              <a href='#'>beranda</a>{' '}
+              <a href='/'>beranda</a>{' '}
             </li>
             <li>
-              <a href='#'>profil</a>
+              <a href=''>profil</a>
             </li>
             <li>
-              <a href='#'>guru & staff</a>
+              <a href='/guru-staff'>guru & staff</a>
             </li>
             <li>
-              <a href='#'>galeri</a>
+              <a href='/galeri'>galeri</a>
             </li>
             <li>
-              <a href='#'>ppdb</a>
+              <a href='/pendaftaran-peserta-didik-baru'>ppdb</a>
             </li>
           </ul>
         </div>
@@ -129,19 +129,19 @@ function Navbar() {
           <div className='h-[68%]'>
             <ul className='list-none flex flex-col gap-2 text-xl uppercase'>
               <li>
-                <a href='#'>beranda</a>{' '}
+                <a href='/'>beranda</a>{' '}
               </li>
               <li>
                 <a href='#'>profil</a>
               </li>
               <li>
-                <a href='#'>guru & staff</a>
+                <a href='/guru-staff'>guru & staff</a>
               </li>
               <li>
-                <a href='#'>galeri</a>
+                <a href='/galeri'>galeri</a>
               </li>
               <li>
-                <a href='#'>ppdb</a>
+                <a href='/ppdb'>ppdb</a>
               </li>
             </ul>
           </div>
