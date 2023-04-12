@@ -11,8 +11,8 @@ function Navbar() {
   return (
     <>
       <div
-        className={`absolute z-[1000]  hidden md:block w-full px-8 transition duration-300 ease-in-out ${
-          path === '/' ? 'bg-transparent' : 'bg-light-red'
+        className={` z-[1000]  hidden md:block w-full px-8 transition duration-300 ease-in-out ${
+          path === '/' ? 'absolute bg-transparent' : 'bg-light-red'
         }`}
       >
         <div className='py-4 flex max-w-7xl lg:mx-auto justify-between  items-center '>
@@ -47,7 +47,9 @@ function Navbar() {
         }}
       ></div>
       <div
-        className={`z-10 absolute w-full top-4 md:hidden transition duration-300 ease-in-out bg-transparent`}
+        className={`${
+          path === '/' ? 'absolute bg-transparent' : 'bg-light-red py-4'
+        } z-10  w-full top-4 md:hidden transition duration-300 ease-in-out `}
       >
         <div className='flex justify-between px-8'>
           <h3 className='text-3xl italic text-white font-bold tracking-wide'>
