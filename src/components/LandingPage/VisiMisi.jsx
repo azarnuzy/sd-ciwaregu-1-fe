@@ -1,6 +1,8 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
 
 function VisiMisi() {
+  
   return (
     <div className='w-full max-w-7xl md:px-8 mb-10 gap-10 justify-center md:mx-auto flex flex-col'>
       <h2 className='font-extrabold text-center text-2xl mb-4 mt-12'>
@@ -27,5 +29,6 @@ function VisiMisi() {
     </div>
   )
 }
+
 
 export default VisiMisi

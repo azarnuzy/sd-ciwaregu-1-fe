@@ -1,26 +1,19 @@
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
 function Navbar() {
   const [isActive, setIsActive] = useState(false)
-  const [position, setPosition] = useState(0)
+  const router = useRouter()
 
-  const handleScroll = () => {
-    const scrollPosition = window.scrollY // => scroll position
-    setPosition(scrollPosition)
-  }
-
-  useEffect(() => {
-    handleScroll()
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+  const path = router.pathname
+  useEffect(() => {}, [])
 
   return (
     <>
       <div
-        className={`absolute z-[1000]  hidden md:block w-full px-8 transition duration-300 ease-in-out bg-transparent`}
+        className={` z-[1000]  hidden md:block w-full px-8 transition duration-300 ease-in-out ${
+          path === '/' ? 'absolute bg-transparent' : 'bg-light-red'
+        }`}
       >
         <div className='py-4 flex max-w-7xl lg:mx-auto justify-between  items-center '>
           <h3 className='text-3xl italic text-white font-bold tracking-wide'>
@@ -54,7 +47,9 @@ function Navbar() {
         }}
       ></div>
       <div
-        className={`z-10 absolute w-full top-4 md:hidden transition duration-300 ease-in-out bg-transparent`}
+        className={`${
+          path === '/' ? 'absolute bg-transparent' : 'bg-light-red py-4'
+        } z-10  w-full top-4 md:hidden transition duration-300 ease-in-out `}
       >
         <div className='flex justify-between px-8'>
           <h3 className='text-3xl italic text-white font-bold tracking-wide'>
@@ -67,15 +62,15 @@ function Navbar() {
             className='min-h-fit min-w-fit cursor-pointer'
           >
             <svg
-              class='h-8 w-8 text-white'
+              className='h-8 w-8 text-white'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
             >
               <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
                 d='M4 6h16M4 12h16M4 18h16'
               />
             </svg>
@@ -100,15 +95,15 @@ function Navbar() {
                 }}
               >
                 <svg
-                  class='h-8 w-8 text-white'
+                  className='h-8 w-8 text-white'
                   width='24'
                   height='24'
                   viewBox='0 0 24 24'
-                  stroke-width='2'
+                  strokeWidth='2'
                   stroke='currentColor'
                   fill='none'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                 >
                   {' '}
                   <path
@@ -157,13 +152,13 @@ function Navbar() {
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
-                  stroke-width='1.5'
+                  strokeWidth='1.5'
                   stroke='currentColor'
-                  class='w-6 h-6'
+                  className='w-6 h-6'
                 >
                   <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                     d='M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z'
                   />
                 </svg>
@@ -174,13 +169,13 @@ function Navbar() {
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
-                  stroke-width='1.5'
+                  strokeWidth='1.5'
                   stroke='currentColor'
-                  class='w-6 h-6'
+                  className='w-6 h-6'
                 >
                   <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                     d='M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
                   />
                 </svg>
@@ -189,13 +184,13 @@ function Navbar() {
               <div className='flex  mt-3 gap-2 items-center'>
                 <span>Follow Us : </span>
                 <svg
-                  class='h-6 w-6 text-white'
+                  className='h-6 w-6 text-white'
                   viewBox='0 0 24 24'
                   fill='none'
                   stroke='currentColor'
-                  stroke-width='2'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                 >
                   {' '}
                   <rect
@@ -215,13 +210,13 @@ function Navbar() {
                   />
                 </svg>
                 <svg
-                  class='h-6 w-6 text-white'
+                  className='h-6 w-6 text-white'
                   viewBox='0 0 24 24'
                   fill='none'
                   stroke='currentColor'
-                  stroke-width='2'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                 >
                   {' '}
                   <path d='M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z' />{' '}
@@ -229,15 +224,15 @@ function Navbar() {
                 </svg>
                 <span className='p-[2px] rounded-full bg-white text-[#222]'>
                   <svg
-                    class='h-6 w-6 text-[#222]'
+                    className='h-6 w-6 text-[#222]'
                     width='24'
                     height='24'
                     viewBox='0 0 24 24'
-                    stroke-width='2'
+                    strokeWidth='2'
                     stroke='currentColor'
                     fill='none'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                   >
                     {' '}
                     <path
