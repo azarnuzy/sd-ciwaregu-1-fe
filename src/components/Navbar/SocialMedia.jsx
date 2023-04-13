@@ -12,7 +12,7 @@ export default function SocialMedia() {
               viewBox='0 0 24 24'
               strokeWidth='1.5'
               stroke='currentColor'
-              class='w-6 h-6'
+              className='w-6 h-6'
             >
               <path
                 strokeLinecap='round'
@@ -29,7 +29,7 @@ export default function SocialMedia() {
               viewBox='0 0 24 24'
               strokeWidth='1.5'
               stroke='currentColor'
-              class='w-6 h-6'
+              className='w-6 h-6'
             >
               <path
                 strokeLinecap='round'
@@ -43,7 +43,7 @@ export default function SocialMedia() {
         <div className='flex gap-2 items-center'>
           <span>Follow Us : </span>
           <svg
-            class='h-6 w-6 text-white'
+            className='h-6 w-6 text-white'
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
@@ -69,7 +69,7 @@ export default function SocialMedia() {
             />
           </svg>
           <svg
-            class='h-6 w-6 text-white'
+            className='h-6 w-6 text-white'
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
@@ -83,7 +83,7 @@ export default function SocialMedia() {
           </svg>
           <span className='p-[2px] rounded-full bg-white text-[#222]'>
             <svg
-              class='h-6 w-6 text-[#222]'
+              className='h-6 w-6 text-[#222]'
               width='24'
               height='24'
               viewBox='0 0 24 24'

@@ -1,11 +1,27 @@
+import { Transition } from '@headlessui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
+const menuData = [
+  { id: 1, label: 'Visi Misi', url: '/profile/visi-misi' },
+  { id: 2, label: 'Program', url: '/profile/program' },
+  { id: 3, label: 'Fasilitas', url: '/profile/fasilitas' },
+  { id: 4, label: 'Informasi Sekolah', url: '/profile/informasi-sekolah' },
+]
 function Navbar() {
   const [isActive, setIsActive] = useState(false)
   const router = useRouter()
 
   const path = router.pathname
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  function handleMenuOpen() {
+    setIsMenuOpen(true)
+  }
+
+  function handleMenuClose() {
+    setIsMenuOpen(false)
+  }
   useEffect(() => {}, [])
 
   return (
@@ -24,7 +40,58 @@ function Navbar() {
               <a href='/'>beranda</a>{' '}
             </li>
             <li>
-              <a href=''>profil</a>
+              <button
+                onMouseEnter={() => setIsMenuOpen(true)}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className='700   py-2 rounded inline-flex items-center'
+              >
+                <span className=' uppercase items-center font-semibold '>
+                  Profile
+                </span>
+                <svg
+                  className='h-6 w-6 text-white'
+                  width='20'
+                  height='20'
+                  viewBox='0 0 24 24'
+                  strokeWidth='2'
+                  stroke='currentColor'
+                  fill='none'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                >
+                  {' '}
+                  <path
+                    stroke='none'
+                    d='M0 0h24v24H0z'
+                  />{' '}
+                  <polyline points='6 9 12 15 18 9' />
+                </svg>
+              </button>
+              <Transition
+                show={isMenuOpen}
+                enter='transition ease-out duration-100'
+                enterFrom='transform opacity-0 scale-95'
+                enterTo='transform opacity-100 scale-100'
+                leave='transition ease-in duration-75'
+                leaveFrom='transform opacity-100 scale-100'
+                leaveTo='transform opacity-0 scale-95'
+              >
+                <div
+                  className='absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-lg'
+                  onMouseEnter={() => setIsMenuOpen(true)}
+                  onMouseLeave={() => setIsMenuOpen(false)}
+                >
+                  {menuData.map((item) => (
+                    <a
+                      href={item.url}
+                      className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                      key={item.id}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </Transition>
             </li>
             <li>
               <a href='/guru-staff'>guru & staff</a>
@@ -132,7 +199,56 @@ function Navbar() {
                 <a href='/'>beranda</a>{' '}
               </li>
               <li>
-                <a href='#'>profil</a>
+                <button
+                  onMouseEnter={() => setIsMenuOpen(true)}
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className='700   py-2  rounded inline-flex items-center'
+                >
+                  <span className=' uppercase items-center '>Profile</span>
+                  <svg
+                    className='h-6 w-6 text-white'
+                    width='20'
+                    height='20'
+                    viewBox='0 0 24 24'
+                    strokeWidth='2'
+                    stroke='currentColor'
+                    fill='none'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  >
+                    {' '}
+                    <path
+                      stroke='none'
+                      d='M0 0h24v24H0z'
+                    />{' '}
+                    <polyline points='6 9 12 15 18 9' />
+                  </svg>
+                </button>
+                <Transition
+                  show={isMenuOpen}
+                  enter='transition ease-out duration-100'
+                  enterFrom='transform opacity-0 scale-95'
+                  enterTo='transform opacity-100 scale-100'
+                  leave='transition ease-in duration-75'
+                  leaveFrom='transform opacity-100 scale-100'
+                  leaveTo='transform opacity-0 scale-95'
+                >
+                  <div
+                    className='absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-lg'
+                    onMouseEnter={() => setIsMenuOpen(true)}
+                    onMouseLeave={() => setIsMenuOpen(false)}
+                  >
+                    {menuData.map((item) => (
+                      <a
+                        href={item.url}
+                        className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                        key={item.id}
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </Transition>
               </li>
               <li>
                 <a href='/guru-staff'>guru & staff</a>
