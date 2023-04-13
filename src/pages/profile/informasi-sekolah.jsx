@@ -25,7 +25,7 @@ function InformasiSekolah() {
           Informasi Sekolah
         </h2>
         <div className='border border-solid bg-origin-blue h-2 w-16 flex justify-center mb-10'></div>
-        <div className='shadow-xl border-[1px]  border-solid border-slate-200 rounded p-8 mx-16 bg-white mb-10'>
+        <div className='shadow-xl border-[1px]  border-solid border-slate-200 rounded p-4  md:p-8 md:mx-16 bg-white mb-10'>
           <table className='w-full border-collapse'>
             <tbody>
               {data.map((row, index) => (
