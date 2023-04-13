@@ -43,9 +43,9 @@ function Navbar() {
               <button
                 onMouseEnter={() => setIsMenuOpen(true)}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className='700   py-2 px-4 rounded inline-flex items-center'
+                className='700   py-2 rounded inline-flex items-center'
               >
-                <span className=' uppercase items-center font-semibold mr-1'>
+                <span className=' uppercase items-center font-semibold '>
                   Profile
                 </span>
                 <svg
