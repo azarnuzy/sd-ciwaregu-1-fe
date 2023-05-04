@@ -10,13 +10,13 @@ export default function Login() {
               Admin <span className="font-thin">SDN CIWAREGU</span>
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              or
+              belum punya akun?
               <a
-                href="#"
+                href="/login/register"
                 className="font-meduim text-light-red hover:text-red-600 pr-2"
               >
                 {" "}
-                Register
+                daftar
               </a>
             </p>
           </div>
@@ -27,7 +27,7 @@ export default function Login() {
             <div>
               <input type="text" autoComplete="none" required className="apperance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500
               text-gray-900 rounded-t-md mb-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10sm text-sm"
-              placeholder="Username"/>
+              placeholder="Username / NIS"/>
             </div>
 
             <div>
