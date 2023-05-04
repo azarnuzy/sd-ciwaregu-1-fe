@@ -102,6 +102,9 @@ function Navbar() {
             <li>
               <a href='/pendaftaran-peserta-didik-baru'>ppdb</a>
             </li>
+            <li>
+              <a href='/login' className='bg-white p-2 px-5 rounded text-light-red px- text-sm'>login</a>
+            </li>
           </ul>
         </div>
       </div>
