@@ -66,7 +66,7 @@ const listEmployee = [
   },
 ]
 
-function index() {
+function GuruStaff() {
   return (
     <>
       <MainLayout>
@@ -101,4 +101,4 @@ function index() {
   )
 }
 
-export default index
+export default GuruStaff
