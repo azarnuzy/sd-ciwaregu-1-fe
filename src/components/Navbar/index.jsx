@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 const menuData = [
   { id: 1, label: 'Visi Misi', url: '/profile/visi-misi' },
@@ -15,15 +16,6 @@ function Navbar() {
   const path = router.pathname
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  function handleMenuOpen() {
-    setIsMenuOpen(true)
-  }
-
-  function handleMenuClose() {
-    setIsMenuOpen(false)
-  }
-  useEffect(() => {}, [])
-
   return (
     <>
       <div
@@ -37,7 +29,7 @@ function Navbar() {
           </h3>
           <ul className='flex list-none gap-4 md:gap-5 lg:gap-8 text-white uppercase items-center font-semibold'>
             <li>
-              <a href='/'>beranda</a>{' '}
+              <Link href='/'>beranda</Link>{' '}
             </li>
             <li>
               <button
@@ -82,25 +74,28 @@ function Navbar() {
                   onMouseLeave={() => setIsMenuOpen(false)}
                 >
                   {menuData.map((item) => (
-                    <a
+                    <Link
                       href={item.url}
                       className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                       key={item.id}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </Transition>
             </li>
             <li>
-              <a href='/guru-staff'>guru & staff</a>
+              <Link href='/guru-staff'>guru & staff</Link>
             </li>
             <li>
-              <a href='/galeri'>galeri</a>
+              <Link href='/galeri'>galeri</Link>
             </li>
             <li>
-              <a href='/pendaftaran-peserta-didik-baru'>ppdb</a>
+              <Link href='/pendaftaran-peserta-didik-baru'>alur ppdb</Link>
+            </li>
+            <li className='py-2 px-4 bg-light-red text-white rounded-full transition border border-1 border-solid border-light-red duration-300 hover:text-light-red hover:bg-white'>
+              <Link href='/daftar-ppdb'>Daftar</Link>
             </li>
           </ul>
         </div>
@@ -196,7 +191,7 @@ function Navbar() {
           <div className='h-[68%]'>
             <ul className='list-none flex flex-col gap-2 text-xl uppercase'>
               <li>
-                <a href='/'>beranda</a>{' '}
+                <Link href='/'>beranda</Link>{' '}
               </li>
               <li>
                 <button
@@ -251,13 +246,16 @@ function Navbar() {
                 </Transition>
               </li>
               <li>
-                <a href='/guru-staff'>guru & staff</a>
+                <Link href='/guru-staff'>guru & staff</Link>
               </li>
               <li>
-                <a href='/galeri'>galeri</a>
+                <Link href='/galeri'>galeri</Link>
               </li>
               <li>
-                <a href='/ppdb'>ppdb</a>
+                <Link href='/ppdb'>alur ppdb</Link>
+              </li>
+              <li className='py-2 px-4 bg-light-red text-white rounded-full transition border border-1 border-solid border-light-red duration-300 hover:text-light-red hover:bg-white max-w-fit '>
+                <Link href='/daftar-ppdb'>Daftar</Link>
               </li>
             </ul>
           </div>

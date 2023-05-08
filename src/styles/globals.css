@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
+
+.form-container {
+  @apply appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none shadow-sm;
+}
+
+.form-title {
+  @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+}
 @tailwind utilities;

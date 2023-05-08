@@ -19,6 +19,7 @@ const MainLayout = ({ children }) => {
           isMounted ? 'opacity-100' : 'opacity-0'
         } w-full transition-opacity duration-500 ease-in-out mx-auto max-w-7xl px-4 sm:px-8 md:px-16 lg:px-24`}
       >
+        {children ? <></> : <div className='h-[70vh] w-full'></div>}
         {children}
       </main>
       <Footer />
