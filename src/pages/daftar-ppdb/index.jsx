@@ -1,4 +1,5 @@
 import Page1 from '@/components/FormPPDB/Page1'
+import Page2 from '@/components/FormPPDB/Page2'
 import FormProvider from '@/context/FormContext'
 import MainLayout from '@/layouts/MainLayout'
 import React from 'react'
@@ -14,6 +15,7 @@ function FormPpdb() {
     <MainLayout>
       <FormProvider>
         <Page1 />
+        {/* <Page2 /> */}
       </FormProvider>
     </MainLayout>
   )

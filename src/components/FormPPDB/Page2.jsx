@@ -1,6 +1,30 @@
-import React from 'react'
+import { useFormContext } from '@/context/FormContext'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 function Page2() {
+  const { kelengkapanData, setKelengkapanData } = useFormContext()
+
+  const [formData, setFormData] = useState({})
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm()
+
+  const handleInputChange = (e) => {
+    const { name, files } = e.target
+
+    setFormData({ ...formData, [name]: files })
+  }
+
+  console.log(formData?.pasPhoto !== undefined)
+  const onSubmit = (data) => {
+    setKelengkapanData(data)
+  }
+
   return (
     <form>
       <div className='mb-3'>
