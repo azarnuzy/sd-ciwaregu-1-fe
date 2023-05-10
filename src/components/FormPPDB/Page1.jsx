@@ -2,19 +2,10 @@ import { useFormContext } from '@/context/FormContext'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import RadioButton from '../Form/RadioButton'
-import { asalMuasal, jenisKelamin } from '@/utils/form'
+import { agamaIndonesia, asalMuasal, jenisKelamin } from '@/utils/form'
 import InputText from '../Form/InputText'
 import InputFile from '../Form/InputFile'
 import SelectItem from '../Form/SelectItem'
-
-const agamaIndonesia = [
-  'Islam',
-  'Kristen Protestan',
-  'Katolik',
-  'Hindu',
-  'Buddha',
-  'Konghucu',
-]
 
 function Page1() {
   const { kelengkapanData, setKelengkapanData } = useFormContext()
