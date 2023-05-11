@@ -51,12 +51,12 @@ export const jenisKelamin = [
 ]
 
 export const agamaIndonesia = [
-  'Islam',
-  'Kristen Protestan',
-  'Katolik',
-  'Hindu',
-  'Buddha',
-  'Konghucu',
+  { 1: 'Islam' },
+  { 2: 'Kristen Protestan' },
+  { 3: 'Katolik' },
+  { 4: 'Hindu' },
+  { 5: 'Buddha' },
+  { 6: 'Konghucu' },
 ]
 
 export const pendidikan = [
@@ -139,13 +139,123 @@ export const pekerjaan = [
 
 export const penghasilan = [
   {
-    1: 'Kurang dari Rp1.000.000',
+    name: 'penghasilan',
+    id: 'kurang1Juta',
+    value: 'Kurang dari Rp1.000.000',
+    params: {
+      required: true,
+    },
+    label: 'Kurang dari Rp1.000.000',
   },
+  {
+    name: 'penghasilan',
+    id: 'antara1Sampai2Juta',
+    value: 'Rp1.000.000 - Rp2.000.000',
+    params: {
+      required: true,
+    },
+    label: 'Rp1.000.000 - Rp2.000.000',
+  },
+  {
+    name: 'penghasilan',
+    id: 'lebih2Juta',
+    value: 'Lebih dari Rp2.000.000',
+    params: {
+      required: true,
+    },
+    label: 'Lebih dari Rp2.000.000',
+  },
+]
 
+export const dataPage2 = [
   {
-    1: 'Rp1.000.000 - Rp2.000.000',
+    nameInput: {
+      name: 'ayahName',
+      label: 'Nama Ayah Kandung',
+      placeholder: 'Masukan Nama Ayah Kandung',
+      id: 'ayahName',
+      params: { required: true },
+      errorText: 'Nama Ayah Kandung Harus Diisi',
+    },
+    pendidikanInput: {
+      id: 'ayahPendidikan',
+      errorText: 'Pendidikan Harus Diisi',
+      label: 'Pendidikan',
+      defaultValue: 'Pilih Salah Satu',
+      data: pendidikan,
+    },
+    pekerjaanInput: {
+      id: 'ayahPekerjaan',
+      data: pekerjaan,
+      errorText: 'Pekerjaan Harus Diisi',
+      label: 'Pekerjaan',
+      defaultValue: 'Pilih Salah Satu',
+    },
+    penghasilanInput: {
+      data: penghasilan,
+      label: 'Penghasilan',
+      errorText: 'Penghasilan harus Diisi',
+      params: { required: true },
+    },
   },
   {
-    1: 'Lebih dari Rp2.000.000',
+    nameInput: {
+      name: 'ibuName',
+      label: 'Nama Ibu Kandung',
+      placeholder: 'Masukan Nama Ibu Kandung',
+      id: 'ibuName',
+      params: { required: true },
+      errorText: 'Nama Ibu Kandung Harus Diisi',
+    },
+    pendidikanInput: {
+      id: 'ibuPendidikan',
+      errorText: 'Pendidikan Harus Diisi',
+      label: 'Pendidikan',
+      defaultValue: 'Pilih Salah Satu',
+      data: pendidikan,
+    },
+    pekerjaanInput: {
+      id: 'ibuPekerjaan',
+      data: pekerjaan,
+      errorText: 'Pekerjaan Harus Diisi',
+      label: 'Pekerjaan',
+      defaultValue: 'Pilih Salah Satu',
+    },
+    penghasilanInput: {
+      data: penghasilan,
+      label: 'Penghasilan',
+      errorText: 'Penghasilan harus Diisi',
+      params: { required: true },
+    },
+  },
+  {
+    nameInput: {
+      name: 'waliName',
+      label: 'Nama Wali Kandung',
+      placeholder: 'Masukan Nama Wali Kandung',
+      id: 'waliName',
+      params: { required: true },
+      errorText: 'Nama Wali Kandung Harus Diisi',
+    },
+    pendidikanInput: {
+      id: 'waliPendidikan',
+      errorText: 'Pendidikan Harus Diisi',
+      label: 'Pendidikan',
+      defaultValue: 'Pilih Salah Satu',
+      data: pendidikan,
+    },
+    pekerjaanInput: {
+      id: 'waliPekerjaan',
+      data: pekerjaan,
+      errorText: 'Pekerjaan Harus Diisi',
+      label: 'Pekerjaan',
+      defaultValue: 'Pilih Salah Satu',
+    },
+    penghasilanInput: {
+      data: penghasilan,
+      label: 'Penghasilan',
+      errorText: 'Penghasilan harus Diisi',
+      params: { required: true },
+    },
   },
 ]

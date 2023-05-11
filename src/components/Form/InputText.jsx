@@ -14,7 +14,7 @@ function InputText(props) {
         type={props.type}
         className='form-container'
         id={props.id}
-        {...props.register(props.id, props.params)}
+        {...props.register(props.name, props.params)}
       />
       {props.errors.namaAsalSekolah && (
         <span

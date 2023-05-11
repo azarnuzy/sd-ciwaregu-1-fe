@@ -1,6 +1,7 @@
 import React from 'react'
 
 function SelectItem(props) {
+  // console.log(props)
   return (
     <>
       <label
@@ -15,19 +16,24 @@ function SelectItem(props) {
         {...props.register(props.id, props.label)}
       >
         <option
-          value={props.defaultValue}
+          value={''}
           disabled
+          selected
         >
-          Masukan Agama
+          {props.defaultValue}
         </option>
-        {props.data.map((item, i) => (
-          <option
-            value={item}
-            key={i}
-          >
-            {item}
-          </option>
-        ))}
+        {props.data.map((item, i) => {
+          const key = Object.keys(item)[0]
+          const value = item[key]
+          return (
+            <option
+              value={value}
+              key={i}
+            >
+              {value}
+            </option>
+          )
+        })}
       </select>
       {props.errors.agama && (
         <span

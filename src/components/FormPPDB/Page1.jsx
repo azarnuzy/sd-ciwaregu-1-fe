@@ -8,8 +8,7 @@ import InputFile from '../Form/InputFile'
 import SelectItem from '../Form/SelectItem'
 
 function Page1() {
-  const { kelengkapanData, setKelengkapanData } = useFormContext()
-
+  const { kelengkapanData, setKelengkapanData, nextPage } = useFormContext()
   const [formData, setFormData] = useState({})
 
   const {
@@ -27,6 +26,7 @@ function Page1() {
 
   const onSubmit = (data) => {
     setKelengkapanData(data)
+    nextPage()
   }
 
   return (
@@ -50,6 +50,7 @@ function Page1() {
         </div>
         <div className=' col-span-4'>
           <InputText
+            name={'namaAsalSekolah'}
             type={'text'}
             label={'Nama Asal Sekolah'}
             placeholder={'Masukan Nama Asal Sekolah'}
@@ -115,6 +116,7 @@ function Page1() {
         </h3>
         <div className='col-span-4'>
           <InputText
+            name={'namaLengkap'}
             type={'text'}
             label={'Nama Lengkap'}
             placeholder={'Masukan Nama Lengkap'}
@@ -127,6 +129,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'namaPanggilan'}
             type={'text'}
             label={'Nama Panggilan'}
             placeholder={'Masukan Nama Panggilan'}
@@ -148,6 +151,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'tempatLahir'}
             type={'text'}
             label={'Tempat Lahir'}
             placeholder={'Masukan Tempat Lahir'}
@@ -160,6 +164,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'tanggalLahir'}
             type={'date'}
             label={'Tanggal Lahir'}
             placeholder={'Masukan Tanggal Lahir'}
@@ -178,11 +183,12 @@ function Page1() {
             data={agamaIndonesia}
             errorText={'Agama Harus Diisi'}
             label={'Agama'}
-            defaultValue={'Islam'}
+            defaultValue={'Pilih Salah Satu'}
           />
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'beratBadan'}
             type={'text'}
             label={'Berat Badan'}
             placeholder={'Masukan Berat Badan'}
@@ -195,6 +201,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'tinggiBadan'}
             type={'text'}
             label={'Tinggi Badan'}
             placeholder={'Masukan Tinggi Badan'}
@@ -207,6 +214,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'alamat'}
             type={'text'}
             label={'Alamat'}
             placeholder={'Masukan Alamat'}
@@ -219,6 +227,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-1'>
           <InputText
+            name={'rt'}
             type={'text'}
             label={'RT'}
             placeholder={'Masukan RT'}
@@ -231,6 +240,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-1'>
           <InputText
+            name={'rw'}
             type={'text'}
             label={'RW'}
             placeholder={'Masukan RW'}
@@ -243,6 +253,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'kelurahan'}
             type={'text'}
             label={'Kelurahan/Desa'}
             placeholder={'Masukan Kelurahan/Desa'}
@@ -255,6 +266,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'kecamatan'}
             type={'text'}
             label={'Kecamatan'}
             placeholder={'Masukan Kecamatan'}
@@ -267,6 +279,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'kabupaten'}
             type={'text'}
             label={'Kabupaten'}
             placeholder={'Masukan Kabupaten'}
@@ -279,6 +292,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'provinsi'}
             type={'text'}
             label={'Provinsi'}
             placeholder={'Masukan Provinsi'}
@@ -291,6 +305,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'kodePos'}
             type={'text'}
             label={'Kode Pos'}
             placeholder={'Masukan Kode Pos'}
@@ -303,6 +318,7 @@ function Page1() {
         </div>
         <div className='col-span-4 sm:col-span-2'>
           <InputText
+            name={'noHp'}
             type={'text'}
             label={'Nomor Handphone'}
             placeholder={'Masukan Nomor Handphone'}

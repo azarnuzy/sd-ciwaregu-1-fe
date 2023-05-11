@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 const FormContext = createContext({})
 
@@ -9,7 +10,7 @@ function FormProvider({ children }) {
     2: 'Formulir 3',
   }
 
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
 
   const [kelengkapanData, setKelengkapanData] = useState({
     asalMuasal: '',
@@ -59,6 +60,24 @@ function FormProvider({ children }) {
       penghasilan: '',
     },
   })
+
+  const [formData, setFormData] = useState({})
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm()
+
+  const nextPage = () => {
+    setPage(2)
+  }
+
+  const previousPage = () => {
+    setPage(1)
+  }
+
   return (
     <FormContext.Provider
       value={{
@@ -68,6 +87,15 @@ function FormProvider({ children }) {
         setIdentitasDiri,
         identitasKeluarga,
         setIdentitasKeluarga,
+        formData,
+        setFormData,
+        register,
+        handleSubmit,
+        getValues,
+        errors,
+        nextPage,
+        previousPage,
+        page,
       }}
     >
       {children}
