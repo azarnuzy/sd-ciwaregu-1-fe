@@ -17,9 +17,11 @@ function Page2() {
     getValues,
     errors,
     page,
+    previousPage,
   } = useFormContext()
 
   const onSubmit = (data) => {
+    previousPage()
     setKelengkapanData(data)
   }
 
@@ -84,6 +86,22 @@ function Page2() {
             </div>
           </React.Fragment>
         ))}
+        <div className='col-span-4 gap-3 flex justify-end items-center'>
+          <button
+            className='justify-self-end bg-white text-origin-blue border-1 border-origin-blue border-solid border font-medium rounded-lg px-3 py-3'
+            onClick={() => {
+              previousPage()
+            }}
+          >
+            Sebelumnya
+          </button>
+          <button
+            className='justify-self-end bg-origin-blue text-white font-medium rounded-lg px-10 py-3'
+            type='submit'
+          >
+            Kirim
+          </button>
+        </div>
       </form>
     </div>
   )
