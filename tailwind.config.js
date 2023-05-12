@@ -18,6 +18,8 @@ module.exports = {
         'light-red': '#fc5252',
         'light-purple': '#381ddb',
         'very-light-purple': '#bbb0fb',
+        'dark-blue': '#252B42',
+        'origin-blue': '#381DDB',
       },
     },
     plugins: [],
