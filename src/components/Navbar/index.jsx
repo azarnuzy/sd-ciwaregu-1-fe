@@ -96,15 +96,21 @@ function Navbar() {
             <li>
               <Link href='/alur-ppdb'>alur ppdb</Link>
             </li>
-            <li className='text-white p-2 px-5 rounded bg-light-red px- text-sm'>
+            <li className='text-white p-2 px-5 rounded bg-origin-blue px- text-sm'>
               <Link href='/daftar-ppdb'>Daftar PPDB</Link>
             </li>
-            <li>
+            <li className='flex gap-2'>
               <a
                 href='/login'
                 className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
               >
                 login
+              </a>
+              <a
+                href='/register'
+                className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
+              >
+                register
               </a>
             </li>
           </ul>

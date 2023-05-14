@@ -1,9 +1,10 @@
-import RegisterPage from '@/components/Login/RegisterPage'
+import Register from '@/components/Login/RegisterPage'
+import LoginPage from '@/components/Login/RegisterPage'
 
-export default function Register() {
+export default function Login() {
   return (
     <>
-      <RegisterPage />
+      <Register />
     </>
   )
 }

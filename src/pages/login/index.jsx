@@ -1,10 +1,10 @@
-import LoginPage from '@/components/Login/LoginPage'
+import Login from '@/components/Login/LoginPage'
+import RegisterPage from '@/components/Login/LoginPage'
 
-
-export default function Login() {
-    return (
-        <>
-            <LoginPage/>
-        </>
-    )
+export default function Register() {
+  return (
+    <>
+      <Login />
+    </>
+  )
 }
