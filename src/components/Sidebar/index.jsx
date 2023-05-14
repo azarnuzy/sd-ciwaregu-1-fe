@@ -27,7 +27,7 @@ const Sidebar = () => {
         { title: 'List Gallery', url: 'admin/gallery' },
         { title: 'List Program Sekolah', url: 'admin/program' },
         { title: 'Statistik', url: 'admin/statistik' },
-        { title: 'Hasil PPDB', url: 'admin/hasil-ppdb' },
+        { title: 'Hasil PPDB', url: 'admin/ppdb' },
       ],
     },
     {
@@ -42,7 +42,7 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className='w-64 bg-light-red text-white font-semibold shadow-lg h-screen'>
+    <div className='min-w-64 w-64 bg-light-red text-white font-semibold shadow-lg h-[calc(100vh-60px)]'>
       <Link
         href={'/'}
         className='px-4 my-2 w-full text-2xl font-bold italic inline-block'
