@@ -19,14 +19,16 @@ function Navbar() {
   return (
     <>
       <div
-        className={` z-[1000]  hidden md:block w-full px-8 transition duration-300 ease-in-out ${
+        className={` z-[1000]  hidden lg:block w-full px-8 transition duration-300 ease-in-out ${
           path === '/' ? 'absolute bg-transparent' : 'bg-light-red'
         }`}
       >
         <div className='py-4 flex max-w-7xl lg:mx-auto justify-between  items-center '>
-          <h3 className='text-3xl italic text-white font-bold tracking-wide'>
-            SDN Ciwaregu
-          </h3>
+          <Link href={'/'}>
+            <h3 className='text-3xl italic text-white font-bold tracking-wide'>
+              SDN Ciwaregu
+            </h3>
+          </Link>
           <ul className='flex list-none gap-4 md:gap-5 lg:gap-8 text-white uppercase items-center font-semibold'>
             <li>
               <Link href='/'>beranda</Link>{' '}
@@ -92,7 +94,7 @@ function Navbar() {
               <Link href='/gallery'>galeri</Link>
             </li>
             <li>
-              <Link href='/pendaftaran-peserta-didik-baru'>alur ppdb</Link>
+              <Link href='/alur-ppdb'>alur ppdb</Link>
             </li>
             <li className='text-white p-2 px-5 rounded bg-light-red px- text-sm'>
               <Link href='/daftar-ppdb'>Daftar PPDB</Link>
@@ -119,7 +121,7 @@ function Navbar() {
       <div
         className={`${
           path === '/' ? 'absolute bg-transparent' : 'bg-light-red py-4'
-        } z-10  w-full top-4 md:hidden transition duration-300 ease-in-out `}
+        } z-10  w-full top-4 lg:hidden transition duration-300 ease-in-out `}
       >
         <div className='flex justify-between px-8'>
           <h3 className='text-3xl italic text-white font-bold tracking-wide'>
@@ -260,7 +262,7 @@ function Navbar() {
                 <Link href='/gallery'>galeri</Link>
               </li>
               <li>
-                <Link href='/ppdb'>alur ppdb</Link>
+                <Link href='/alur-ppdb'>alur ppdb</Link>
               </li>
               <li className=' text-center p-2 px-5 rounded text-white bg-light-red px- text-sm  '>
                 <Link href='/daftar-ppdb'>Daftar PPDB</Link>
