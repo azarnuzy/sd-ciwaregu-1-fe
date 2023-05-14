@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer/Footer'
 import SocialMedia from '@/components/Navbar/SocialMedia'
+import Head from 'next/head'
+import HeadComponent from '@/components/Head/HeadComponents'
 
 const MainLayout = ({ children }) => {
   const [isMounted, setIsMounted] = useState(false)
@@ -12,6 +14,7 @@ const MainLayout = ({ children }) => {
 
   return (
     <div className='min-h-screen bg-gray-100'>
+      <HeadComponent />
       <SocialMedia />
       <Navbar />
       <main

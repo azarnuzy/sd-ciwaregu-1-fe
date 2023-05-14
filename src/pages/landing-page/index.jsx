@@ -1,3 +1,4 @@
+import HeadComponent from '@/components/Head/HeadComponents'
 import About from '@/components/LandingPage/About'
 import Gallery from '@/components/LandingPage/Gallery'
 import HeaderComponent from '@/components/LandingPage/HeaderComponent'
@@ -10,6 +11,7 @@ import MainLayout from '@/layouts/MainLayout'
 export default function LandingPage() {
   return (
     <>
+      <HeadComponent />
       <HeaderComponent />
       <About />
       <Stat />
