@@ -1,3 +1,4 @@
+import HeadComponent from '@/components/Head/HeadComponents'
 import About from '@/components/LandingPage/About'
 import Gallery from '@/components/LandingPage/Gallery'
 import HeaderComponent from '@/components/LandingPage/HeaderComponent'
@@ -9,6 +10,7 @@ import VisiMisi from '@/components/LandingPage/VisiMisi'
 export default function LandingPage() {
   return (
     <>
+      <HeadComponent />
       <HeaderComponent />
       <About />
       <Stat />

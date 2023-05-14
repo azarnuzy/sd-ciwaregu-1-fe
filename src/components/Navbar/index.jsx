@@ -1,4 +1,11 @@
 import { Transition } from '@headlessui/react'
+import {
+  Bars3Icon,
+  ChevronDownIcon,
+  EnvelopeIcon,
+  PhoneIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -8,10 +15,12 @@ const menuData = [
   { id: 2, label: 'Program', url: '/profile/program' },
   { id: 3, label: 'Fasilitas', url: '/profile/fasilitas' },
   { id: 4, label: 'Informasi Sekolah', url: '/profile/informasi-sekolah' },
+  { id: 5, label: 'Guru & Staff', url: 'guru-staff' },
 ]
 function Navbar() {
   const [isActive, setIsActive] = useState(false)
   const router = useRouter()
+  const [isHover, setIsHover] = useState(false)
 
   const path = router.pathname
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -19,14 +28,16 @@ function Navbar() {
   return (
     <>
       <div
-        className={` z-[1000]  hidden md:block w-full px-8 transition duration-300 ease-in-out ${
+        className={` z-[1000]  hidden lg:block w-full px-8 transition duration-300 ease-in-out ${
           path === '/' ? 'absolute bg-transparent' : 'bg-light-red'
         }`}
       >
         <div className='py-4 flex max-w-7xl lg:mx-auto justify-between  items-center '>
-          <h3 className='text-3xl italic text-white font-bold tracking-wide'>
-            SDN Ciwaregu
-          </h3>
+          <Link href={'/'}>
+            <h3 className='text-3xl italic text-white font-bold tracking-wide'>
+              SDN Ciwaregu
+            </h3>
+          </Link>
           <ul className='flex list-none gap-4 md:gap-5 lg:gap-8 text-white uppercase items-center font-semibold'>
             <li>
               <Link href='/'>beranda</Link>{' '}
@@ -40,24 +51,7 @@ function Navbar() {
                 <span className=' uppercase items-center font-semibold '>
                   Profile
                 </span>
-                <svg
-                  className='h-6 w-6 text-white'
-                  width='20'
-                  height='20'
-                  viewBox='0 0 24 24'
-                  strokeWidth='2'
-                  stroke='currentColor'
-                  fill='none'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                >
-                  {' '}
-                  <path
-                    stroke='none'
-                    d='M0 0h24v24H0z'
-                  />{' '}
-                  <polyline points='6 9 12 15 18 9' />
-                </svg>
+                <ChevronDownIcon className='w-5 ' />
               </button>
               <Transition
                 show={isMenuOpen}
@@ -85,17 +79,41 @@ function Navbar() {
                 </div>
               </Transition>
             </li>
-            <li>
+            {/* <li
+              onMouseEnter={() => {
+                setIsHover(true)
+              }}
+              onMouseLeave={() => setIsHover(false)}
+              className={`max-w-[60px] ${
+                isHover
+                  ? ' '
+                  : 'overflow-hidden text-ellipsis whitespace-nowrap'
+              }   `}
+            >
               <Link href='/guru-staff'>guru & staff</Link>
+            </li> */}
+            <li>
+              <Link href='/gallery'>galeri</Link>
             </li>
             <li>
-              <Link href='/galeri'>galeri</Link>
+              <Link href='/alur-ppdb'>alur ppdb</Link>
             </li>
-            <li>
-              <Link href='/pendaftaran-peserta-didik-baru'>alur ppdb</Link>
+            <li className='text-white p-2 px-5 rounded bg-origin-blue px- text-sm'>
+              <Link href='/daftar-ppdb'>Daftar PPDB</Link>
             </li>
-            <li className='py-2 px-4 bg-light-red text-white rounded-full transition border border-1 border-solid border-light-red duration-300 hover:text-light-red hover:bg-white'>
-              <Link href='/daftar-ppdb'>Daftar</Link>
+            <li className='flex gap-2'>
+              <a
+                href='/login'
+                className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
+              >
+                login
+              </a>
+              <a
+                href='/register'
+                className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
+              >
+                register
+              </a>
             </li>
           </ul>
         </div>
@@ -111,7 +129,7 @@ function Navbar() {
       <div
         className={`${
           path === '/' ? 'absolute bg-transparent' : 'bg-light-red py-4'
-        } z-10  w-full top-4 md:hidden transition duration-300 ease-in-out `}
+        } z-10  w-full top-4 lg:hidden transition duration-300 ease-in-out `}
       >
         <div className='flex justify-between px-8'>
           <h3 className='text-3xl italic text-white font-bold tracking-wide'>
@@ -123,19 +141,7 @@ function Navbar() {
             }}
             className='min-h-fit min-w-fit cursor-pointer'
           >
-            <svg
-              className='h-8 w-8 text-white'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M4 6h16M4 12h16M4 18h16'
-              />
-            </svg>
+            <Bars3Icon className='w-7 h-8 text-white font-extrabold' />
           </div>
         </div>
         <div
@@ -156,35 +162,7 @@ function Navbar() {
                   setIsActive(() => false)
                 }}
               >
-                <svg
-                  className='h-8 w-8 text-white'
-                  width='24'
-                  height='24'
-                  viewBox='0 0 24 24'
-                  strokeWidth='2'
-                  stroke='currentColor'
-                  fill='none'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                >
-                  {' '}
-                  <path
-                    stroke='none'
-                    d='M0 0h24v24H0z'
-                  />{' '}
-                  <line
-                    x1='18'
-                    y1='6'
-                    x2='6'
-                    y2='18'
-                  />{' '}
-                  <line
-                    x1='6'
-                    y1='6'
-                    x2='18'
-                    y2='18'
-                  />
-                </svg>
+                <XMarkIcon className='h-7' />
               </div>
             </div>
           </div>
@@ -200,24 +178,7 @@ function Navbar() {
                   className='700   py-2  rounded inline-flex items-center'
                 >
                   <span className=' uppercase items-center '>Profile</span>
-                  <svg
-                    className='h-6 w-6 text-white'
-                    width='20'
-                    height='20'
-                    viewBox='0 0 24 24'
-                    strokeWidth='2'
-                    stroke='currentColor'
-                    fill='none'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  >
-                    {' '}
-                    <path
-                      stroke='none'
-                      d='M0 0h24v24H0z'
-                    />{' '}
-                    <polyline points='6 9 12 15 18 9' />
-                  </svg>
+                  <ChevronDownIcon className='w-5 ' />
                 </button>
                 <Transition
                   show={isMenuOpen}
@@ -245,54 +206,36 @@ function Navbar() {
                   </div>
                 </Transition>
               </li>
-              <li>
+              <li className=''>
                 <Link href='/guru-staff'>guru & staff</Link>
               </li>
               <li>
-                <Link href='/galeri'>galeri</Link>
+                <Link href='/gallery'>galeri</Link>
               </li>
               <li>
-                <Link href='/ppdb'>alur ppdb</Link>
+                <Link href='/alur-ppdb'>alur ppdb</Link>
               </li>
-              <li className='py-2 px-4 bg-light-red text-white rounded-full transition border border-1 border-solid border-light-red duration-300 hover:text-light-red hover:bg-white max-w-fit '>
-                <Link href='/daftar-ppdb'>Daftar</Link>
+              <li className=' text-center p-2 px-5 rounded text-white bg-light-red px- text-sm  '>
+                <Link href='/daftar-ppdb'>Daftar PPDB</Link>
+              </li>
+              <li className='bg-white text-center p-2 px-5 rounded text-light-red px- text-sm min-[100px]'>
+                <a
+                  href='/login'
+                  className=''
+                >
+                  login
+                </a>
               </li>
             </ul>
           </div>
           <div className='flex flex-col gap-3'>
             <div className='flex flex-col gap-1'>
               <div className='flex gap-3 items-center'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth='1.5'
-                  stroke='currentColor'
-                  className='w-6 h-6'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z'
-                  />
-                </svg>
+                <PhoneIcon className='w-6' />
                 <span className='text-md'>0858-6451-9008</span>
               </div>
               <div className='flex gap-3 items-center'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth='1.5'
-                  stroke='currentColor'
-                  className='w-6 h-6'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
-                  />
-                </svg>
+                <EnvelopeIcon className='w-6' />
                 <span className='text-md'>sd.ciwaregu@gmail.com</span>
               </div>
               <div className='flex  mt-3 gap-2 items-center'>

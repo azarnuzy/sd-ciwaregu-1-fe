@@ -71,11 +71,21 @@ function FormProvider({ children }) {
   } = useForm()
 
   const nextPage = () => {
-    setPage(2)
+    let temp = page
+    if (temp + 1 <= 3) {
+      temp++
+    }
+
+    setPage(temp)
   }
 
   const previousPage = () => {
-    setPage(1)
+    let temp = page
+    if (temp - 1 >= 0) {
+      temp--
+    }
+
+    setPage(temp)
   }
 
   return (

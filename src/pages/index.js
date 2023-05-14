@@ -4,30 +4,80 @@ import LandingPage from './landing-page'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer/Footer'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'] })
-
-export const metadata = {
-  title: 'SDN Ciwaregu',
-  description:
-    'Selamat datang di website SDN Ciwaregu! Dapatkan informasi tentang sekolah kami, program, acara, kurikulum, dan lainnya. Tetap terhubung dengan guru, siswa, dan orang tua kami.',
-  keywords:
-    'sekolah dasar, pendidikan, siswa, guru, orang tua, program, acara, kurikulum, kegiatan, pembelajaran',
-  author: 'azarnuzy',
-  image: '/images/header-1.jpg', // Replace with the path to your website's homepage image
-  url: 'https://v1-dev-sdciwaregu.netlify.app/', // Replace with your website's URL
-  twitterUsername: '@sdnciwaregu', // Replace with your Twitter username
-  siteName: 'SDN Ciwaregu',
-  siteLanguage: 'en-US', // Replace with the appropriate language code
-  siteLocale: 'id_ID', // Replace with the appropriate locale code
-  type: 'website',
-}
 
 export default function Home() {
   const router = useRouter()
   const path = router.pathname
   return (
     <div className={inter.className}>
+      <Head>
+        <Head>
+          <title>SDN Ciwaregu 1</title>
+          <meta
+            name='description'
+            content='Selamat datang di website SDN Ciwaregu 1! Dapatkan informasi tentang sekolah kami, program, acara, kurikulum, dan lainnya. Tetap terhubung dengan guru, siswa, dan orang tua kami.'
+          />
+          <meta
+            name='keywords'
+            content='sekolah dasar, pendidikan, siswa, guru, orang tua, program, acara, kurikulum, kegiatan, pembelajaran'
+          />
+          <meta
+            name='author'
+            content='M. Azar nuzy'
+          />
+          <meta
+            property='og:title'
+            content='SDN Ciwaregu 1'
+          />
+          <meta
+            property='og:description'
+            content='Selamat datang di website SDN Ciwaregu 1! Dapatkan informasi tentang sekolah kami, program, acara, kurikulum, dan lainnya. Tetap terhubung dengan guru, siswa, dan orang tua kami.'
+          />
+          <meta
+            property='og:type'
+            content='website'
+          />
+          <meta
+            property='og:url'
+            content='https://v1-dev-sdciwaregu.netlify.app/'
+          />
+          <meta
+            property='og:image'
+            content='/images/header-1.jpg'
+          />
+          <meta
+            property='twitter:title'
+            content='SDN Ciwaregu 1'
+          />
+          <meta
+            property='twitter:description'
+            content='Selamat datang di website SDN Ciwaregu 1! Dapatkan informasi tentang sekolah kami, program, acara, kurikulum, dan lainnya. Tetap terhubung dengan guru, siswa, dan orang tua kami.'
+          />
+          <meta
+            property='twitter:image'
+            content='/images/header-1.jpg'
+          />
+          <meta
+            name='twitter:creator'
+            content='@yourtwitterusername'
+          />
+          <meta
+            name='twitter:card'
+            content='summary_large_image'
+          />
+          <link
+            rel='canonical'
+            href='https://v1-dev-sdciwaregu.netlify.app/'
+          />
+          <link
+            rel='icon'
+            href='/favicon.ico'
+          />
+        </Head>
+      </Head>
       <SocialMedia />
       {path !== '/' && <Navbar />}
       <LandingPage />
