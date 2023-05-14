@@ -6,7 +6,7 @@ import SecondNavbar from '../Navbar/SecondNavbar'
 export default function Login() {
   return (
     <>
-      <div className='absolute top-0 w-full'>
+      <div className='absolute sm:hidden top-0 w-full'>
         <SecondNavbar />
       </div>
       <div className='w-full h-screen flex flex-row'>
