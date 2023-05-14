@@ -89,13 +89,21 @@ function Navbar() {
               <Link href='/guru-staff'>guru & staff</Link>
             </li>
             <li>
-              <Link href='/galeri'>galeri</Link>
+              <Link href='/gallery'>galeri</Link>
             </li>
             <li>
               <Link href='/pendaftaran-peserta-didik-baru'>alur ppdb</Link>
             </li>
-            <li className='py-2 px-4 bg-light-red text-white rounded-full transition border border-1 border-solid border-light-red duration-300 hover:text-light-red hover:bg-white'>
-              <Link href='/daftar-ppdb'>Daftar</Link>
+            <li className='text-white p-2 px-5 rounded bg-light-red px- text-sm'>
+              <Link href='/daftar-ppdb'>Daftar PPDB</Link>
+            </li>
+            <li>
+              <a
+                href='/login'
+                className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
+              >
+                login
+              </a>
             </li>
           </ul>
         </div>
@@ -249,13 +257,21 @@ function Navbar() {
                 <Link href='/guru-staff'>guru & staff</Link>
               </li>
               <li>
-                <Link href='/galeri'>galeri</Link>
+                <Link href='/gallery'>galeri</Link>
               </li>
               <li>
                 <Link href='/ppdb'>alur ppdb</Link>
               </li>
-              <li className='py-2 px-4 bg-light-red text-white rounded-full transition border border-1 border-solid border-light-red duration-300 hover:text-light-red hover:bg-white max-w-fit '>
-                <Link href='/daftar-ppdb'>Daftar</Link>
+              <li className=' text-center p-2 px-5 rounded text-white bg-light-red px- text-sm  '>
+                <Link href='/daftar-ppdb'>Daftar PPDB</Link>
+              </li>
+              <li className='bg-white text-center p-2 px-5 rounded text-light-red px- text-sm min-[100px]'>
+                <a
+                  href='/login'
+                  className=''
+                >
+                  login
+                </a>
               </li>
             </ul>
           </div>
