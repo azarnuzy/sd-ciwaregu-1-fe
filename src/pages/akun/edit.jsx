@@ -1,11 +1,11 @@
-import Informasi from '@/components/Akun/Informasi'
+import Edit from '@/components/Akun/Edit'
 import MainLayout from '@/layouts/MainLayout'
 
-export default function InformasiAkun() {
+export default function EditAkun() {
   return (
     <>
       <MainLayout>
-        <Informasi/>
+        <Edit/>
       </MainLayout>
     </>
   )
