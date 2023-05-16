@@ -5,6 +5,7 @@ import content4 from "../../assets/images/content-4.jpg";
 import content5 from "../../assets/images/content-5.jpg";
 
 export default function Login() {
+  
   const data = [
     {
       image: content3,
