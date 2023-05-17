@@ -1,34 +1,17 @@
 import SocialMedia from "@/components/Navbar/SocialMedia";
 import AdminLayout from "@/layouts/AdminLayout";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import content3 from "@/assets/images/content-3.jpg";
 import content4 from "@/assets/images/content-4.jpg";
 import content5 from "@/assets/images/content-5.jpg";
-
-export function IconoirPlus(props) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-        d="M6 12h6m6 0h-6m0 0V6m0 6v6"
-      ></path>
-    </svg>
-  );
-}
+import Link from "next/link";
+import { useEffect } from "react";
+import { AddIcon } from "@/components/Icons/AddIcon";
+import { EditIcon } from "@/components/Icons/EditIcon";
+import { DeleteIcon } from "@/components/Icons/DeleteIcon";
 
 function IndexGallery() {
-
   const data_gallery = [
     {
       id: 1,
@@ -49,19 +32,44 @@ function IndexGallery() {
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse reiciendis eos quos consequuntur voluptates. Maiores tempora amet impedit quae consequuntur!",
     },
   ];
-  
+
+  const [gallery, setGallery] = useState("");
+
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    // Fetch data user active from API
+    // fetchUsersActive(query);
+    console.log(process.env.API_URL);
+    // eslint-disable-next-line
+  }, []);
+
+  // async function fetchUsersActive(key) {
+  //   let uri = "";
+  //   if (key === "") uri = `${process.env.API_URL}/v1/galleries`;
+  //   else uri = `${process.env.API_URL}/api/users/active/${key}`;
+
+  //   await fetch(`${process.env.API_URL}/v1/galleries`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(process.env.API_URL);
+  //       setGallery(data);
+  //     });
+  // }
+
   return (
     <>
       <SocialMedia />
       <AdminLayout>
         <div className="w-full pb-10 pt-8 px-4 h-fit flex flex-row justify-between items-center">
           <h1 className="text-3xl font-bold">List Gallery</h1>
-          
+
           <a
-          href="/admin/gallery/add"
-          className="py-2 px-4 flex flex-row justify-center items-center bg-origin-blue hover:bg-[#1c0081] rounded-sm text-slate-100">
+            href="/admin/gallery/add"
+            className="py-2 px-4 flex flex-row justify-center items-center bg-origin-blue hover:bg-[#1c0081] rounded-sm text-slate-100"
+          >
             <div className="mr-2 cursor-pointer">Tambah Baru</div>
-            <IconoirPlus className="font-[60px] text-white"/>
+            <AddIcon />
           </a>
         </div>
         <div className="overflow-hidden">
@@ -80,7 +88,7 @@ function IndexGallery() {
                 <th className="px-6 py-3 bg-gray-200 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                   Deskripsi
                 </th>
-                
+
                 <th className="px-6 py-3 bg-gray-200">Action</th>
               </tr>
             </thead>
@@ -88,17 +96,33 @@ function IndexGallery() {
               {data_gallery.map((item) => (
                 <tr key={item.id}>
                   <td className="px-6 py-4 whitespace-nowrap">{item.id}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                  <Image
-                    src={item.image}
-                    className="object-cover w-[100px] h-[100px] rounded-full"
-                  />
+                  <td className="w-[150px] px-6 py-4 whitespace-nowrap">
+                    <Image
+                      src={item.image}
+                      className="object-cover w-[70px] h-[70px] rounded"
+                    />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap  ">{item.kegiatan}</td>
-                  <td className="px-6 py-4  w-[500px]">{item.desc}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    {item.kegiatan}
+                  </td>
+                  <td className="px-6 py-4  w-[500px] text-sm">{item.desc}</td>
                   <td className="px-6 py-4 whitespace-nowrap flex flex-row gap-2 justify-center items-center">
-                    <button className="py-1 px-3 rounded-sm text-slate-70 text-xs bg-blue-900 ">Edit</button>
-                    <button className="py-1 px-3 rounded-sm text-slate-70 text-xs bg-red-600 ">Delete</button>
+                    <Link
+                      href={`/admin/gallery/edit?id=${item.id}`}
+                      className="text-slate-100 py-1 px-3 rounded-md text-slate-70 text-xs bg-blue-900
+                    flex flex-row justify-center items-center gap-1"
+                    >
+                      <EditIcon />
+                      Edit
+                    </Link>
+                    <Link
+                      href="#"
+                      className="text-slate-100 py-1 px-3 rounded-md text-slate-70 text-xs bg-red-600
+                      flex flex-row justify-center items-center gap-1"
+                    >
+                      <DeleteIcon />
+                      Delete
+                    </Link>
                   </td>
                 </tr>
               ))}
