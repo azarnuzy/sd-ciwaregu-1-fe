@@ -6,14 +6,20 @@ import { dataPage2, pendidikan } from '@/utils/form'
 import SelectItem from '../Form/SelectItem'
 import RadioButton from '../Form/RadioButton'
 import axios from 'axios'
+import { useRouter } from 'next/router'
+import LoadingSpinner from '../Loading/LoadingSpinner'
 
 function Page3() {
   const { kelengkapanData, register, handleSubmit, errors, previousPage } =
     useFormContext()
+  const [isLoading, setIsLoading] = useState(false)
+
+  const router = useRouter()
 
   const onSubmit = (data) => {
     // previousPage()
-    console.log(kelengkapanData)
+    // console.log(kelengkapanData)
+    setIsLoading(true)
     const postData = async () => {
       try {
         const formData = new FormData()
@@ -44,13 +50,10 @@ function Page3() {
         formData.append('pendidikanIbu', kelengkapanData.ibuPendidikan)
         formData.append('pekerjaanIbu', kelengkapanData.ibuPekerjaan)
         formData.append('penghasilanIbu', kelengkapanData.penghasilanIbu)
-        formData.append('namaWali', kelengkapanData.waliName || '')
-        formData.append('pendidikanWali', kelengkapanData.waliPendidikan || '')
-        formData.append('pekerjaanWali', kelengkapanData.waliPekerjaan || '')
-        formData.append(
-          'penghasilanWali',
-          kelengkapanData.penghasilanWali || ''
-        )
+        formData.append('namaWali', null)
+        formData.append('pendidikanWali', null)
+        formData.append('pekerjaanWali', null)
+        formData.append('penghasilanWali', null)
         formData.append('pasFotoUrl', kelengkapanData.pasPhoto[0])
         formData.append('aktaUrl', kelengkapanData.akteLahir[0])
         formData.append('kkUrl', kelengkapanData.kartuKeluarga[0])
@@ -60,10 +63,13 @@ function Page3() {
           formData,
           { headers: { 'Content-Type': 'multipart/form-data' } }
         )
-        console.log(response.data)
+        // console.log(response.data)
+        router.push('/daftar-ppdb/success')
       } catch (error) {
         console.error(error)
       }
+
+      setIsLoading(false)
     }
 
     postData()
@@ -75,6 +81,10 @@ function Page3() {
 
   return (
     <div className='flex justify-center items-center flex-col'>
+      <LoadingSpinner
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
       <h2 className='my-8 max-w-lg font-bold text-center text-3xl mb-5 tracking-wider'>
         Formulir PPDB SD Negeri Ciwaregu
       </h2>
