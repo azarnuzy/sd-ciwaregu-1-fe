@@ -5,6 +5,7 @@ import InputText from '../Form/InputText'
 import { dataPage2, pendidikan } from '@/utils/form'
 import SelectItem from '../Form/SelectItem'
 import RadioButton from '../Form/RadioButton'
+import axios from 'axios'
 
 function Page3() {
   const { kelengkapanData, register, handleSubmit, errors, previousPage } =
@@ -12,78 +13,60 @@ function Page3() {
 
   const onSubmit = (data) => {
     // previousPage()
+    console.log(kelengkapanData)
     const postData = async () => {
       try {
         const formData = new FormData()
-        formData.append('id', 'string')
-        formData.append('noPendaftaran', 'string')
-        formData.append('namaLengkap', 'string')
-        formData.append('namaPanggilan', 'string')
-        formData.append('jenisKelamin', 'string')
-        formData.append('tempatLahir', 'string')
-        formData.append('tanggalLahir', 'string')
-        formData.append('agama', 'string')
-        formData.append('tinggiBadan', 174)
-        formData.append('beratBadan', 64)
-        formData.append('alamat', 'string')
-        formData.append('rt', 'string')
-        formData.append('rw', 'string')
-        formData.append('kelurahan', 'string')
-        formData.append('kecamatan', 'string')
-        formData.append('kabupaten', 'string')
-        formData.append('provinsi', 'string')
-        formData.append('kodePos', 'string')
-        formData.append('noTelp', 'string')
-        formData.append('asalMuasal', 'string')
-        formData.append('sekolahAsal', 'string')
-        formData.append('createdAt', 'string')
-        formData.append('updatedAt', 'string')
-        formData.append('status', 'string')
-        formData.append('studentId', null)
-
-        // Add keluarga object to form data
-        const keluarga = {
-          id: 'string',
-          namaAyah: 'string',
-          pendidikanAyah: 'string',
-          pekerjaanAyah: 'string',
-          penghasilanAyah: 90000000,
-          namaIbu: 'string',
-          pendidikanIbu: 'string',
-          pekerjaanIbu: 'string',
-          penghasilanIbu: 0,
-          createdAt: 'string',
-          updatedAt: 'string',
-          candidateId: 'string',
-        }
-        formData.append('keluarga', JSON.stringify(keluarga))
-
-        // Add berkas object to form data
-        const berkas = {
-          id: 'string',
-          pasFotoUrl: file,
-          aktaUrl: file,
-          kkUrl: file,
-          createdAt: 'string',
-          updatedAt: 'string',
-          candidateId: 'string',
-        }
-        formData.append('berkas', JSON.stringify(berkas))
-
-        // Add wali object to form data
-        const wali = null
-        formData.append('wali', JSON.stringify(wali))
-
+        formData.append('namaLengkap', kelengkapanData.namaLengkap)
+        formData.append('namaPanggilan', kelengkapanData.namaPanggilan)
+        formData.append('jenisKelamin', kelengkapanData.jenisKelamin)
+        formData.append('tempatLahir', kelengkapanData.tempatLahir)
+        formData.append('tanggalLahir', kelengkapanData.tanggalLahir)
+        formData.append('agama', kelengkapanData.agama)
+        formData.append('tinggiBadan', kelengkapanData.tinggiBadan)
+        formData.append('beratBadan', kelengkapanData.beratBadan)
+        formData.append('alamat', kelengkapanData.alamat)
+        formData.append('rt', kelengkapanData.rt)
+        formData.append('rw', kelengkapanData.rw)
+        formData.append('kelurahan', kelengkapanData.kelurahan)
+        formData.append('kecamatan', kelengkapanData.kecamatan)
+        formData.append('kabupaten', kelengkapanData.kabupaten)
+        formData.append('provinsi', kelengkapanData.provinsi)
+        formData.append('kodePos', kelengkapanData.kodePos)
+        formData.append('noTelp', kelengkapanData.noHp)
+        formData.append('asalMuasal', kelengkapanData.asalMuasal)
+        formData.append('sekolahAsal', kelengkapanData.namaAsalSekolah)
+        formData.append('namaAyah', kelengkapanData.ayahName)
+        formData.append('pendidikanAyah', kelengkapanData.ayahPendidikan)
+        formData.append('pekerjaanAyah', kelengkapanData.ayahPekerjaan)
+        formData.append('penghasilanAyah', kelengkapanData.penghasilanAyah)
+        formData.append('namaIbu', kelengkapanData.ibuName)
+        formData.append('pendidikanIbu', kelengkapanData.ibuPendidikan)
+        formData.append('pekerjaanIbu', kelengkapanData.ibuPekerjaan)
+        formData.append('penghasilanIbu', kelengkapanData.penghasilanIbu)
+        formData.append('namaWali', kelengkapanData.waliName || '')
+        formData.append('pendidikanWali', kelengkapanData.waliPendidikan || '')
+        formData.append('pekerjaanWali', kelengkapanData.waliPekerjaan || '')
+        formData.append(
+          'penghasilanWali',
+          kelengkapanData.penghasilanWali || ''
+        )
+        formData.append('pasFotoUrl', kelengkapanData.pasPhoto[0])
+        formData.append('aktaUrl', kelengkapanData.akteLahir[0])
+        formData.append('kkUrl', kelengkapanData.kartuKeluarga[0])
         // Send POST request
         const response = await axios.post(
-          'https://api.example.com/endpoint',
-          formData
+          `${process.env.NEXT_PUBLIC_BASE_URL}/v1/ppdb`,
+          formData,
+          { headers: { 'Content-Type': 'multipart/form-data' } }
         )
         console.log(response.data)
       } catch (error) {
         console.error(error)
       }
     }
+
+    postData()
   }
 
   useEffect(() => {
