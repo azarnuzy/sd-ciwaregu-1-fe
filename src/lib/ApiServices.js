@@ -2,10 +2,6 @@ import axios from 'axios'
 import BaseApiServices from './BaseApiServices'
 import Cookies from 'js-cookie'
 
-const instance = axios.create({
-  baseURL: process.env.BASE_URL,
-})
-
 const getAccessToken = () => {
   return Cookies.get('accessToken')
 }
@@ -15,7 +11,7 @@ const getData = (url, params, onSuccess, onFailed, onFinish) => {
     Authorization: `Bearer ${getAccessToken()}`,
   }
 
-  instance
+  axios
     .get(url, {
       params: params,
       headers: headers,
@@ -38,7 +34,7 @@ const postData = (url, data, onSuccess, onFailed, onFinish) => {
     Authorization: `Bearer ${getAccessToken()}`,
   }
 
-  instance
+  axios
     .post(url, data, {
       headers: headers,
     })
@@ -60,7 +56,7 @@ const putData = (url, data, onSuccess, onFailed, onFinish) => {
     Authorization: `Bearer ${getAccessToken()}`,
   }
 
-  instance
+  axios
     .post(url, data, {
       headers: headers,
     })
@@ -75,4 +71,15 @@ const putData = (url, data, onSuccess, onFailed, onFinish) => {
     .catch((error) => {
       return BaseApiServices.handleError(error, onSuccess, onFailed, onFinish)
     })
+}
+
+export const login = async (data) => {
+  const url = `${process.env.BASE_URL}/v1/login`
+
+  const res = await axios
+    .post(url, data)
+    .then((response) => response.data)
+    .catch((err) => err.response.data)
+
+  return res
 }

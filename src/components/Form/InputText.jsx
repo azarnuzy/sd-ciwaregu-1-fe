@@ -1,6 +1,7 @@
 import React from 'react'
 
 function InputText(props) {
+  // console.log(props.errors)
   return (
     <>
       <label
@@ -16,9 +17,9 @@ function InputText(props) {
         id={props.id}
         {...props.register(props.name, props.params)}
       />
-      {props.errors.namaAsalSekolah && (
+      {props.errors.hasOwnProperty(props.name) && (
         <span
-          className='text-red-700'
+          className='text-red-700 text-sm my-1 inline-block'
           role='alert'
         >
           {props.errorText}
