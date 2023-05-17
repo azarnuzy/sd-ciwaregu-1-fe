@@ -84,6 +84,22 @@ function Page1() {
         </div>
         <div className='col-span-4'>
           <InputFile
+            id={'akteLahir'}
+            label={'Surat Keterangan/Akte Lahir'}
+            params={{
+              required: true,
+              onChange: (e) => {
+                handleInputChange(e)
+              },
+            }}
+            register={register}
+            errors={errors}
+            formData={formData?.akteLahir}
+            errorText={'Surat Keterangan/Akte Lahir Harus Diunggah'}
+          />
+        </div>
+        <div className='col-span-4'>
+          <InputFile
             id={'kartuKeluarga'}
             label={'Kartu Keluarga'}
             params={{
