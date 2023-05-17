@@ -7,26 +7,87 @@ import SelectItem from '../Form/SelectItem'
 import RadioButton from '../Form/RadioButton'
 
 function Page3() {
-  const {
-    kelengkapanData,
-    setIdentitasKeluarga,
-    formData,
-    setFormData,
-    register,
-    handleSubmit,
-    getValues,
-    errors,
-    page,
-    previousPage,
-  } = useFormContext()
+  const { kelengkapanData, register, handleSubmit, errors, previousPage } =
+    useFormContext()
 
   const onSubmit = (data) => {
-    previousPage()
-    // setIdentitasKeluarga(data)
+    // previousPage()
+    const postData = async () => {
+      try {
+        const formData = new FormData()
+        formData.append('id', 'string')
+        formData.append('noPendaftaran', 'string')
+        formData.append('namaLengkap', 'string')
+        formData.append('namaPanggilan', 'string')
+        formData.append('jenisKelamin', 'string')
+        formData.append('tempatLahir', 'string')
+        formData.append('tanggalLahir', 'string')
+        formData.append('agama', 'string')
+        formData.append('tinggiBadan', 174)
+        formData.append('beratBadan', 64)
+        formData.append('alamat', 'string')
+        formData.append('rt', 'string')
+        formData.append('rw', 'string')
+        formData.append('kelurahan', 'string')
+        formData.append('kecamatan', 'string')
+        formData.append('kabupaten', 'string')
+        formData.append('provinsi', 'string')
+        formData.append('kodePos', 'string')
+        formData.append('noTelp', 'string')
+        formData.append('asalMuasal', 'string')
+        formData.append('sekolahAsal', 'string')
+        formData.append('createdAt', 'string')
+        formData.append('updatedAt', 'string')
+        formData.append('status', 'string')
+        formData.append('studentId', null)
+
+        // Add keluarga object to form data
+        const keluarga = {
+          id: 'string',
+          namaAyah: 'string',
+          pendidikanAyah: 'string',
+          pekerjaanAyah: 'string',
+          penghasilanAyah: 90000000,
+          namaIbu: 'string',
+          pendidikanIbu: 'string',
+          pekerjaanIbu: 'string',
+          penghasilanIbu: 0,
+          createdAt: 'string',
+          updatedAt: 'string',
+          candidateId: 'string',
+        }
+        formData.append('keluarga', JSON.stringify(keluarga))
+
+        // Add berkas object to form data
+        const berkas = {
+          id: 'string',
+          pasFotoUrl: file,
+          aktaUrl: file,
+          kkUrl: file,
+          createdAt: 'string',
+          updatedAt: 'string',
+          candidateId: 'string',
+        }
+        formData.append('berkas', JSON.stringify(berkas))
+
+        // Add wali object to form data
+        const wali = null
+        formData.append('wali', JSON.stringify(wali))
+
+        // Send POST request
+        const response = await axios.post(
+          'https://api.example.com/endpoint',
+          formData
+        )
+        console.log(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 
   useEffect(() => {
-    console.log(kelengkapanData)
+    // console.log(kelengkapanData)
   }, [kelengkapanData])
 
   return (
@@ -85,13 +146,6 @@ function Page3() {
                   data={item.penghasilanInput.data}
                   register={register}
                   errors={errors}
-                  // value={
-                  //   item.penghasilanInput.id === 'penghasilanAyah'
-                  //     ? kelengkapanData?.penghasilanAyah
-                  //     : item.penghasilanInput.id === 'penghasilanIbu'
-                  //     ? kelengkapanData?.penghasilanIbu
-                  //     : kelengkapanData?.penghasilanWali
-                  // }
                   label={item.penghasilanInput.label}
                   errorText={item.penghasilanInput.errorText}
                   name={item.penghasilanInput.id}
