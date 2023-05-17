@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = async (data) => {
-    // console.log(process.env.NEXT_PUBLIC_BASE_URL)
     try {
       const url = `${process.env.NEXT_PUBLIC_BASE_URL}/v1/login`
 
@@ -34,7 +33,7 @@ export function AuthProvider({ children }) {
       const { authentication_token, userId } = res.data
       //   console.log(res)
       setToken(authentication_token)
-
+      setUserId(userId)
       Cookies.set('token', authentication_token)
       Cookies.set('user_id', userId)
 
@@ -59,6 +58,10 @@ export function AuthProvider({ children }) {
     login,
     logout,
     isAuthenticated,
+    token,
+    setToken,
+    userId,
+    setUserId,
   }
 
   return (

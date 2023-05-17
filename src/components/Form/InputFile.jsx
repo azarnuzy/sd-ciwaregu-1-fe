@@ -1,6 +1,8 @@
+import { useFormContext } from '@/context/form-context'
 import React from 'react'
 
 function InputFile(props) {
+  const { kelengkapanData, setKelengkapanData } = useFormContext()
   return (
     <>
       <label
@@ -13,8 +15,18 @@ function InputFile(props) {
         <input
           type='file'
           id={props.id}
+          // value={kelengkapanData[props.id]}
           className='absolute text-gray-700  inset-0 w-full h-full opacity-0 cursor-pointer'
-          {...props.register(props.id, props.params)}
+          {...props.register(props.id, {
+            required: true,
+            onChange: (e) => {
+              setKelengkapanData({
+                ...kelengkapanData,
+                [props.id]: e.target.files,
+              })
+              props.handleInputChange(e)
+            },
+          })}
         />
         <div
           className={`flex ${
