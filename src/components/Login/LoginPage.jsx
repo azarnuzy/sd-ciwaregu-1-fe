@@ -41,9 +41,9 @@ export default function Login() {
       return 'Password Harus Diisi'
     }
     // Regular expression for password validation
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d.*\d)[A-Za-z\d]{8,}$/
     if (!passwordRegex.test(value)) {
-      return 'Password harus mengandung 8 karakter, 1 kapital, dan 1 nomor'
+      return 'Password harus mengandung 8 karakter, 1 kapital, dan 2 nomor'
     }
     return true
   }
@@ -129,6 +129,12 @@ export default function Login() {
               )}
             </div>
             <div className='w-full my-3'>
+              <label
+                className='form-title'
+                htmlFor='password'
+              >
+                Password
+              </label>
               <input
                 placeholder='Masukkan Password'
                 type='password'

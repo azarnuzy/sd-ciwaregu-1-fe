@@ -74,7 +74,18 @@ const putData = (url, data, onSuccess, onFailed, onFinish) => {
 }
 
 export const login = async (data) => {
-  const url = `${process.env.BASE_URL}/v1/login`
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/v1/login`
+
+  const res = await axios
+    .post(url, data)
+    .then((response) => response.data)
+    .catch((err) => err.response.data)
+
+  return res
+}
+
+export const registerAcc = async (data) => {
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/v1/register`
 
   const res = await axios
     .post(url, data)

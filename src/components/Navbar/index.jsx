@@ -79,19 +79,6 @@ function Navbar() {
                 </div>
               </Transition>
             </li>
-            {/* <li
-              onMouseEnter={() => {
-                setIsHover(true)
-              }}
-              onMouseLeave={() => setIsHover(false)}
-              className={`max-w-[60px] ${
-                isHover
-                  ? ' '
-                  : 'overflow-hidden text-ellipsis whitespace-nowrap'
-              }   `}
-            >
-              <Link href='/guru-staff'>guru & staff</Link>
-            </li> */}
             <li>
               <Link href='/gallery'>galeri</Link>
             </li>
