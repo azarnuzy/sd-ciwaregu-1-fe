@@ -11,7 +11,6 @@ import getConfig from "next/config";
 
 export default function IndexGallery() {
   const [galleryData, setGalleryData] = useState([]);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchData();
