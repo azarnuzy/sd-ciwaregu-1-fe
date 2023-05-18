@@ -6,11 +6,12 @@ import axios from "axios";
 import getConfig from "next/config";
 import { useRouter } from "next/router";
 
-export default function AddGallery() {
+export default function AddGuruStaff() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
+    jenisPTK: "",
+    name: "",
+    email: "",
     imageUrl: null,
   });
 
@@ -22,12 +23,14 @@ export default function AddGallery() {
     }
   };
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const postData = new FormData();
-      postData.append("title", formData.title);
-      postData.append("description", formData.description);
+      postData.append("jenisPTK", formData.jenisPTK);
+      postData.append("name", formData.name);
+      postData.append("email", formData.email);
       postData.append("imageUrl", formData.imageUrl);
 
       const { publicRuntimeConfig } = getConfig();
@@ -39,7 +42,7 @@ export default function AddGallery() {
         Authorization: `Bearer ${apiKey}`,
       };
 
-      const response = await axios.post(`${apiUrl}/v1/galleries`, postData, {
+      const response = await axios.post(`${apiUrl}/v1/teachers`, postData, {
         headers: headers,
       });
       console.log(response.data);
@@ -55,7 +58,7 @@ export default function AddGallery() {
       <AdminLayout>
         <div className="w-full pb-10 pt-8 px-4 h-fit flex flex-row justify-center items-center">
           <h1 className="text-3xl font-bold text-slate-900 uppercase tracking-wide">
-            Tambah Galeri
+            Tambah Guru & Staff
           </h1>
         </div>
         <div className="w-[1000px] h-fit flex justify-center items-center">
@@ -67,45 +70,64 @@ export default function AddGallery() {
               <form className="w-5/6" onSubmit={handleSubmit}>
                 <div className="w-full">
                   <label className="text-xl font-semibold tracking-wide">
-                    Nama Kegiatan
+                    Jenis PTK
                   </label>
                   <input
                     type="text"
-                    id="title"
-                    name="title"
-                    value={formData.title}
+                    id="jenisPTK"
+                    name="jenisPTK"
+                    value={formData.jenisPTK}
                     onChange={handleChange}
-                    autoComplete="title"
+                    autoComplete="jenisPTK"
                     required
                     className="my-3 w-full py-2 px-3 border border-slate-900 placeholder-black/30
               text-slate-900 rounded-sm focus:outline-none focus:ring-light-purple focus:border-light-purple text-md
               shadow-md"
-                    placeholder="Masukan nama kegiatan"
+                    placeholder="Masukan jenis PTK"
+                  />
+                </div>
+
+                <div className="w-full">
+                  <label className="text-xl font-semibold tracking-wide">
+                    Nama
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    autoComplete="name"
+                    required
+                    className="my-3 w-full py-2 px-3 border border-slate-900 placeholder-black/30
+              text-slate-900 rounded-sm focus:outline-none focus:ring-light-purple focus:border-light-purple text-md
+              shadow-md"
+                    placeholder="Masukan nama"
                   />
                 </div>
                 <div className="w-full">
                   <label className="text-xl font-semibold tracking-wide">
-                    Deskripsi Kegiatan
+                    Email
                   </label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
-                    autoComplete="description"
+                    autoComplete="email"
                     required
-                    className="w-full my-3 py-2 px-3 border border-slate-900 placeholder-black/30
-                    text-slate-900 rounded sm focus:outline-none focus:ring-light-purple focus:border-light-purple text-md
-                    shadow-md"
-                    placeholder="Masukan deskripsi kegiatan"
-                    rows="3"
-                  ></textarea>
+                    className="my-3 w-full py-2 px-3 border border-slate-900 placeholder-black/30
+              text-slate-900 rounded-sm focus:outline-none focus:ring-light-purple focus:border-light-purple text-md
+              shadow-md"
+                    placeholder="Masukan email"
+                  />
                 </div>
-                <div className="w-full mb-3">
-                  <label className="text-xl font-semibold tracking-wide">
-                    Foto Kegiatan
-                  </label>
 
+                <div className="w-full mb-3">
+                <label className="text-xl font-semibold tracking-wide">
+                    Foto
+                  </label>
                   <input
                     className="w-full my-3 py-2 px-3 border border-slate-900 placeholder-black/30
                     text-slate-900 rounded sm focus:outline-none focus:ring-light-purple focus:border-light-purple text-md

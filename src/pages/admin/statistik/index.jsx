@@ -54,14 +54,14 @@ export default function IndexStatistik() {
         <div className="w-full pb-10 pt-8 px-4 h-fit flex flex-row justify-between items-center">
           <h1 className="text-3xl font-bold">Statistik</h1>
 
-          <button
+          {/* <button
             onClick={() => setShowModal(true)}
             
             className="py-2 px-4 flex flex-row justify-center items-center bg-origin-blue hover:bg-[#1c0081] rounded-sm text-slate-100"
           >
             <div className="mr-2 cursor-pointer">edit</div>
             <EditIcon />
-          </button>
+          </button> */}
         </div>
         <div className="grid grid-cols-4 gap-4">
           <div className="w-full h-[200px] rounded-xl flex justify-center items-center flex-row border-2 border-slate-900 shadow-xl">

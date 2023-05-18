@@ -6,40 +6,34 @@ import axios from "axios";
 import getConfig from "next/config";
 import { useRouter } from "next/router";
 
-export default function AddGallery() {
+export default function AddProgram() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    imageUrl: null,
+    name: "",
+    goal: "",
   });
 
   const handleChange = (e) => {
-    if (e.target.name === "imageUrl") {
-      setFormData({ ...formData, [e.target.name]: e.target.files[0] });
-    } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const postData = new FormData();
-      postData.append("title", formData.title);
-      postData.append("description", formData.description);
-      postData.append("imageUrl", formData.imageUrl);
+      const postData = new URLSearchParams();
+      postData.append("name", formData.name);
+      postData.append("goal", formData.goal);
 
       const { publicRuntimeConfig } = getConfig();
       const apiKey = publicRuntimeConfig.API_KEY;
       const apiUrl = publicRuntimeConfig.API_URL;
 
       const headers = {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Bearer ${apiKey}`,
       };
 
-      const response = await axios.post(`${apiUrl}/v1/galleries`, postData, {
+      const response = await axios.post(`${apiUrl}/v1/programs`, postData.toString(), {
         headers: headers,
       });
       console.log(response.data);
@@ -55,27 +49,27 @@ export default function AddGallery() {
       <AdminLayout>
         <div className="w-full pb-10 pt-8 px-4 h-fit flex flex-row justify-center items-center">
           <h1 className="text-3xl font-bold text-slate-900 uppercase tracking-wide">
-            Tambah Galeri
+            Tambah Program
           </h1>
         </div>
         <div className="w-[1000px] h-fit flex justify-center items-center">
           <div
-            className="w-full bg-white rounded-xl flex flex-col border-slate-900 border-2 justify-center items-center 
+            className="w-full bg-white rounded-xl flex flex-col border-slate-900 border-2 justify-center items-center
           shadow-xl h-full"
           >
             <div className="w-full h-full flex justify-center items-center py-16">
               <form className="w-5/6" onSubmit={handleSubmit}>
                 <div className="w-full">
                   <label className="text-xl font-semibold tracking-wide">
-                    Nama Kegiatan
+                    Jenis Kegiatan
                   </label>
                   <input
                     type="text"
-                    id="title"
-                    name="title"
-                    value={formData.title}
+                    id="name"
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
-                    autoComplete="title"
+                    autoComplete="name"
                     required
                     className="my-3 w-full py-2 px-3 border border-slate-900 placeholder-black/30
               text-slate-900 rounded-sm focus:outline-none focus:ring-light-purple focus:border-light-purple text-md
@@ -85,14 +79,14 @@ export default function AddGallery() {
                 </div>
                 <div className="w-full">
                   <label className="text-xl font-semibold tracking-wide">
-                    Deskripsi Kegiatan
+                    Sasaran
                   </label>
                   <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
+                    id="goal"
+                    name="goal"
+                    value={formData.goal}
                     onChange={handleChange}
-                    autoComplete="description"
+                    autoComplete="goal"
                     required
                     className="w-full my-3 py-2 px-3 border border-slate-900 placeholder-black/30
                     text-slate-900 rounded sm focus:outline-none focus:ring-light-purple focus:border-light-purple text-md
@@ -101,23 +95,7 @@ export default function AddGallery() {
                     rows="3"
                   ></textarea>
                 </div>
-                <div className="w-full mb-3">
-                  <label className="text-xl font-semibold tracking-wide">
-                    Foto Kegiatan
-                  </label>
-
-                  <input
-                    className="w-full my-3 py-2 px-3 border border-slate-900 placeholder-black/30
-                    text-slate-900 rounded sm focus:outline-none focus:ring-light-purple focus:border-light-purple text-md
-                    shadow-md
-                    "
-                    onChange={handleChange}
-                    id="imageUrl"
-                    name="imageUrl"
-                    autoComplete="imageUrl"
-                    type="file"
-                  />
-                </div>
+                
                 <div className="w-full flex flex-row gap-2 mt-4 justify-center">
                   <button
                     type="submit"

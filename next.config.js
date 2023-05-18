@@ -6,7 +6,7 @@ const nextConfig = {
     API_URL: process.env.API_URL,
   },
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['res.cloudinary.com', 'i.stack.imgur.com'],
   },
 }
 
