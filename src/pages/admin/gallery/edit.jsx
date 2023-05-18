@@ -16,7 +16,6 @@ export default function EditGallery() {
     imageUrl: null,
   });
 
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -51,6 +50,7 @@ export default function EditGallery() {
 
   const handleChange = (e) => {
     if (e.target.name === "imageUrl") {
+      console.log('rubah image')
       setGalleryData({ ...galleryData, [e.target.name]: e.target.files[0] });
     } else {
       setGalleryData({ ...galleryData, [e.target.name]: e.target.value });
@@ -71,15 +71,21 @@ export default function EditGallery() {
       const apiKey = publicRuntimeConfig.API_KEY;
       const apiUrl = publicRuntimeConfig.API_URL;
 
+      console.log(postData);
       const headers = {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${apiKey}`,
       };
 
-      const response = await axios.put(`${apiUrl}/v1/galleries/${id}`, postData, {
-        headers: headers,
-      });
+      const response = await axios.put(
+        `${apiUrl}/v1/galleries/${id}`,
+        postData,
+        {
+          headers: headers,
+        }
+      );
       console.log(response.data);
+      router.back();
     } catch (error) {
       console.error(error);
     }

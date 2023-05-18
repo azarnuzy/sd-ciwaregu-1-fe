@@ -115,6 +115,7 @@ export default function IndexGallery() {
                     <Image
                       src={item.imageUrl}
                       className="object-cover rounded"
+                      alt={`${item.title}`}
                       width={70}
                       height={70}
                     />
