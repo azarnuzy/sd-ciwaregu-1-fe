@@ -5,12 +5,6 @@ function InputText(props) {
   // console.log(props.errors)
 
   const { kelengkapanData, setKelengkapanData } = useFormContext()
-
-  let value = ''
-  if (kelengkapanData[props.name] !== undefined) {
-    value = kelengkapanData[props.name]
-  }
-
   // console.log();
   return (
     <>
@@ -25,7 +19,7 @@ function InputText(props) {
         type={props.type}
         className='form-container'
         id={props.id}
-        value={value}
+        value={kelengkapanData[props.name]}
         {...props.register(props.name, {
           required: true,
           onChange: (e) => {
