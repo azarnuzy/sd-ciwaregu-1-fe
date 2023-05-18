@@ -16,7 +16,7 @@ export default function Login() {
     formState: { errors },
   } = useForm()
 
-  const { login } = useAuth()
+  const { login, previousPath, setPreviousPath } = useAuth()
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -41,9 +41,9 @@ export default function Login() {
       return 'Password Harus Diisi'
     }
     // Regular expression for password validation
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d.*\d)[A-Za-z\d]{8,}$/
     if (!passwordRegex.test(value)) {
-      return 'Password harus mengandung 8 karakter, 1 kapital, dan 1 nomor'
+      return 'Password harus mengandung 8 karakter, 1 kapital, dan 2 nomor'
     }
     return true
   }
@@ -51,24 +51,38 @@ export default function Login() {
   const onSubmit = async (data) => {
     setIsLoading(true)
     const response = await login(data)
-    if (!response.status) {
-      if (response.message.includes('Email')) {
-        setError('email', {
-          type: 'manual',
-          message: 'Email Salah',
-        })
-      } else {
-        setError('password', {
-          type: 'manual',
-          message: 'Password Salah',
-        })
-      }
-    }
+    console.log(response)
     setIsLoading(false)
-    if (response.data.role === 'Admin') {
-      router.push('/admin')
-    } else {
-      router.push('/')
+    if (response) {
+      if (!response?.status) {
+        if (response?.message?.includes('Email')) {
+          setError('email', {
+            type: 'manual',
+            message: 'Email Salah',
+          })
+        } else {
+          setError('password', {
+            type: 'manual',
+            message: 'Password Salah',
+          })
+        }
+      }
+      // console.log(response)
+
+      if (previousPath !== '/') {
+        router.push(`${previousPath}`)
+      } else {
+        if (
+          response?.data?.role === 'Admin' ||
+          response?.data?.role === 'Teachers'
+        ) {
+          router.push('/admin')
+        }
+        if (response?.data?.role === 'Users') {
+          router.push('/')
+        }
+      }
+      setPreviousPath('/')
     }
   }
 
@@ -80,6 +94,7 @@ export default function Login() {
             src={content1}
             className='object-cover w-full
           h-full'
+            alt='Siswa'
           />
         </div>
         <div className='w-full md:w-2/5 h-full bg-slate-100 flex justify-center items-center'>
@@ -129,6 +144,12 @@ export default function Login() {
               )}
             </div>
             <div className='w-full my-3'>
+              <label
+                className='form-title'
+                htmlFor='password'
+              >
+                Password
+              </label>
               <input
                 placeholder='Masukkan Password'
                 type='password'
@@ -161,12 +182,12 @@ export default function Login() {
               </button>
               <p className='text-sm mt-5 text-slate-600'>
                 Belum memiliki akun?{' '}
-                <a
+                <Link
                   href='/register'
                   className='text-sm text-red-500'
                 >
                   Daftar disini!
-                </a>
+                </Link>
               </p>
             </div>
           </form>

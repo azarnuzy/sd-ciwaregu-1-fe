@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   handleSuccess: (response, onSuccess, onFailed, onFinish) => {
     const respData = response.data
@@ -22,7 +23,7 @@ export default {
     onSuccess(data, message)
     return typeof onFinish === 'function' ? onFinish() : null
   },
-  handleError: function (error, onSuccess, onFailed, onFinish) {
+  handleError: function (error, _onSuccess, onFailed, onFinish) {
     if (
       typeof error.response === 'object' &&
       typeof error.response.data === 'object'

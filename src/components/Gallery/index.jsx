@@ -68,15 +68,17 @@ export default function Index() {
                     <h5 className="text-xl md:text-2xl font-semibold mb-3">
                       {item.title}
                     </h5>
-                    <p className="text-xs">{item.description}</p>
+                    <p className="text-xs">
+                      {data.desc}
+                    </p>
                   </div>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
       </div>
       
     </>
-  );
+  )
 }
