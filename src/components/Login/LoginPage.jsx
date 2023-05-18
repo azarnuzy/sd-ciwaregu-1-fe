@@ -68,14 +68,13 @@ export default function Login() {
     setIsLoading(false)
 
     if (previousPath) {
-      router.push(previousPath)
-      return
-    }
-
-    if (response.data.role === 'Admin') {
-      router.push('/admin')
+      router.push(`${previousPath}`)
     } else {
-      router.push('/')
+      if (response.data.role === 'Admin') {
+        router.push('/admin')
+      } else {
+        router.push('/')
+      }
     }
   }
 

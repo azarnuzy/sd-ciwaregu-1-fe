@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(null)
   const [userId, setUserId] = useState()
   const router = useRouter()
-  const [previousPath, setPreviousPath] = useState('')
+  const [previousPath, setPreviousPath] = useState('/')
 
   useEffect(() => {
     const storedToken = Cookies.get('token')
@@ -40,7 +40,7 @@ export function AuthProvider({ children }) {
           })
           Cookies.set('user_id', userId, { expires: 1 })
 
-          console.log(router.asPath)
+          // console.log(router.asPath)
           return response.data
         })
         .catch((err) => err.response.data)

@@ -11,10 +11,12 @@ function MainForm() {
   const { token, setPreviousPath } = useAuth()
   const router = useRouter()
 
-  if (!token) {
-    setPreviousPath('/daftar-ppdb')
-    router.push('/login')
-  }
+  useEffect(() => {
+    if (!token) {
+      setPreviousPath('/daftar-ppdb')
+      router.push('/login')
+    }
+  }, [router, setPreviousPath, token])
 
   const { page } = useFormContext()
   return (
