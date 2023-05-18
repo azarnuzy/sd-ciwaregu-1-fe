@@ -15,7 +15,7 @@ const menuData = [
   { id: 2, label: 'Program', url: '/profile/program' },
   { id: 3, label: 'Fasilitas', url: '/profile/fasilitas' },
   { id: 4, label: 'Informasi Sekolah', url: '/profile/informasi-sekolah' },
-  { id: 5, label: 'Guru & Staff', url: 'guru-staff' },
+  { id: 5, label: 'Guru & Staff', url: '/guru-staff' },
 ]
 function Navbar() {
   const [isActive, setIsActive] = useState(false)

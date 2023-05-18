@@ -1,6 +1,6 @@
 import SocialMedia from '@/components/Navbar/SocialMedia'
 import AdminLayout from '@/layouts/AdminLayout'
-import { LinkIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { TrashIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 import React from 'react'
 
