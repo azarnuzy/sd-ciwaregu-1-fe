@@ -1,4 +1,4 @@
-import { useFormContext } from '@/context/FormContext'
+import { useFormContext } from '@/context/form-context'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import RadioButton from '../Form/RadioButton'
@@ -7,8 +7,8 @@ import InputText from '../Form/InputText'
 import InputFile from '../Form/InputFile'
 import SelectItem from '../Form/SelectItem'
 
-function Page1() {
-  const { kelengkapanData, setKelengkapanData, nextPage, previousPage } =
+function Page2() {
+  const { kelengkapanData, setIdentitasDiri, nextPage, previousPage } =
     useFormContext()
   const [formData, setFormData] = useState({})
 
@@ -25,11 +25,12 @@ function Page1() {
     setFormData({ ...formData, [name]: files })
   }
 
-  const onSubmit = (data) => {
-    setKelengkapanData(data)
+  const submit = (data) => {
     nextPage()
   }
-
+  // useEffect(() => {
+  //   // console.log(kelengkapanData)
+  // }, [kelengkapanData])
   return (
     <div className='flex justify-center items-center flex-col'>
       <h2 className='my-8 max-w-lg font-bold text-center text-3xl mb-5 tracking-wider'>
@@ -38,7 +39,7 @@ function Page1() {
       <div className='border border-solid bg-origin-blue h-2 w-16 flex justify-center'></div>
       <form
         className='w-full my-8 px-8 sm:px-16 py-20 rounded-xl bg-white grid grid-cols-4 gap-5 shadow '
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(submit)}
       >
         <h3 className='col-span-4 uppercase tracking-wide text-gray-700 text-lg font-bold '>
           Identitas Calon Peserta Didik
@@ -51,7 +52,6 @@ function Page1() {
             placeholder={'Masukan Nama Lengkap'}
             errors={errors}
             id={'namaLengkap'}
-            params={{ required: true }}
             errorText={' Nama Lengkap Harus Diisi'}
             register={register}
           />
@@ -64,7 +64,6 @@ function Page1() {
             placeholder={'Masukan Nama Panggilan'}
             errors={errors}
             id={'namaPanggilan'}
-            params={{ required: true }}
             errorText={' Nama Panggilan Harus Diisi'}
             register={register}
           />
@@ -74,8 +73,10 @@ function Page1() {
             data={jenisKelamin}
             register={register}
             errors={errors}
+            value={kelengkapanData?.jenisKelamin || ''}
             label={'Jenis Kelamin'}
             errorText={'Jenis Kelamin Harus Diisi'}
+            name={'jenisKelamin'}
           />
         </div>
         <div className='col-span-4 sm:col-span-2'>
@@ -86,7 +87,6 @@ function Page1() {
             placeholder={'Masukan Tempat Lahir'}
             errors={errors}
             id={'tempatLahir'}
-            params={{ required: true }}
             errorText={' Tempat Lahir Harus Diisi'}
             register={register}
           />
@@ -99,7 +99,6 @@ function Page1() {
             placeholder={'Masukan Tanggal Lahir'}
             errors={errors}
             id={'tanggalLahir'}
-            params={{ required: true }}
             errorText={' Tanggal Lahir Harus Diisi'}
             register={register}
           />
@@ -123,7 +122,6 @@ function Page1() {
             placeholder={'Masukan Berat Badan'}
             errors={errors}
             id={'beratBadan'}
-            params={{ required: true }}
             errorText={' Berat Badan Harus Diisi'}
             register={register}
           />
@@ -136,7 +134,6 @@ function Page1() {
             placeholder={'Masukan Tinggi Badan'}
             errors={errors}
             id={'tinggiBadan'}
-            params={{ required: true }}
             errorText={' Tinggi Badan Harus Diisi'}
             register={register}
           />
@@ -149,7 +146,6 @@ function Page1() {
             placeholder={'Masukan Alamat'}
             errors={errors}
             id={'alamat'}
-            params={{ required: true }}
             errorText={' Alamat Harus Diisi'}
             register={register}
           />
@@ -162,7 +158,6 @@ function Page1() {
             placeholder={'Masukan RT'}
             errors={errors}
             id={'rt'}
-            params={{ required: true }}
             errorText={' RT Harus Diisi'}
             register={register}
           />
@@ -175,7 +170,6 @@ function Page1() {
             placeholder={'Masukan RW'}
             errors={errors}
             id={'rw'}
-            params={{ required: true }}
             errorText={' RW Harus Diisi'}
             register={register}
           />
@@ -188,7 +182,6 @@ function Page1() {
             placeholder={'Masukan Kelurahan/Desa'}
             errors={errors}
             id={'kelurahan/desa'}
-            params={{ required: true }}
             errorText={' Kelurahan/Desa Harus Diisi'}
             register={register}
           />
@@ -201,7 +194,6 @@ function Page1() {
             placeholder={'Masukan Kecamatan'}
             errors={errors}
             id={'kecamatan'}
-            params={{ required: true }}
             errorText={' Kecamatan Harus Diisi'}
             register={register}
           />
@@ -214,7 +206,6 @@ function Page1() {
             placeholder={'Masukan Kabupaten'}
             errors={errors}
             id={'kabupaten'}
-            params={{ required: true }}
             errorText={' Kabupaten Harus Diisi'}
             register={register}
           />
@@ -227,7 +218,6 @@ function Page1() {
             placeholder={'Masukan Provinsi'}
             errors={errors}
             id={'provinsi'}
-            params={{ required: true }}
             errorText={' Provinsi Harus Diisi'}
             register={register}
           />
@@ -240,7 +230,6 @@ function Page1() {
             placeholder={'Masukan Kode Pos'}
             errors={errors}
             id={'kodePos'}
-            params={{ required: true }}
             errorText={' Kode Pos Harus Diisi'}
             register={register}
           />
@@ -253,7 +242,6 @@ function Page1() {
             placeholder={'Masukan Nomor Handphone'}
             errors={errors}
             id={'noHp'}
-            params={{ required: true }}
             errorText={' Nomor Handphone Harus Diisi'}
             register={register}
           />
@@ -261,7 +249,7 @@ function Page1() {
         <div className='col-span-4 gap-3 flex justify-end items-center'>
           <button
             className='justify-self-end bg-white text-origin-blue border-1 border-origin-blue border-solid border font-medium rounded-lg px-3 py-3'
-            type='button'
+            // type='button'
             onClick={() => {
               previousPage()
             }}
@@ -270,7 +258,8 @@ function Page1() {
           </button>
           <button
             className='justify-self-end bg-origin-blue text-white font-medium rounded-lg px-10 py-3'
-            onClick={() => nextPage()}
+            type='submit'
+            // onClick={() => nextPage()}
           >
             Selanjutnya
           </button>
@@ -280,4 +269,4 @@ function Page1() {
   )
 }
 
-export default Page1
+export default Page2

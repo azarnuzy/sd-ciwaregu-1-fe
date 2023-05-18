@@ -1,6 +1,11 @@
+import { useFormContext } from '@/context/form-context'
 import React from 'react'
 
 function InputText(props) {
+  // console.log(props.errors)
+
+  const { kelengkapanData, setKelengkapanData } = useFormContext()
+  // console.log();
   return (
     <>
       <label
@@ -14,11 +19,20 @@ function InputText(props) {
         type={props.type}
         className='form-container'
         id={props.id}
-        {...props.register(props.name, props.params)}
+        value={kelengkapanData[props.name]}
+        {...props.register(props.name, {
+          required: true,
+          onChange: (e) => {
+            setKelengkapanData({
+              ...kelengkapanData,
+              [props.name]: e.target.value,
+            })
+          },
+        })}
       />
-      {props.errors.namaAsalSekolah && (
+      {props.errors.hasOwnProperty(props.name) && (
         <span
-          className='text-red-700'
+          className='text-red-700 text-sm my-1 inline-block'
           role='alert'
         >
           {props.errorText}

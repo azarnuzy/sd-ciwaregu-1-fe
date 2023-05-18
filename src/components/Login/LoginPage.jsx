@@ -1,11 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import content1 from '../../assets/images/content-1.jpg'
-import SecondNavbar from '../Navbar/SecondNavbar'
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
+import { useForm } from 'react-hook-form'
+import { useAuth } from '@/context/auth-context'
+import { useRouter } from 'next/router'
+import LoadingSpinner from '../Loading/LoadingSpinner'
 
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm()
+
+  const { login } = useAuth()
+  const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const validateEmail = (value) => {
+    if (!value) {
+      return 'Email Harus Diisi'
+    }
+    // Regular expression for email validation
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
+    // console.log(!emailRegex.test(value))
+    if (!emailRegex.test(value)) {
+      return 'Format Email Salah'
+    }
+    return true
+  }
+
+  const validatePassword = (value) => {
+    if (!value) {
+      return 'Password Harus Diisi'
+    }
+    // Regular expression for password validation
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+    if (!passwordRegex.test(value)) {
+      return 'Password harus mengandung 8 karakter, 1 kapital, dan 1 nomor'
+    }
+    return true
+  }
+
+  const onSubmit = async (data) => {
+    setIsLoading(true)
+    const response = await login(data)
+    if (!response.status) {
+      if (response.message.includes('Email')) {
+        setError('email', {
+          type: 'manual',
+          message: 'Email Salah',
+        })
+      } else {
+        setError('password', {
+          type: 'manual',
+          message: 'Password Salah',
+        })
+      }
+    }
+    setIsLoading(false)
+    if (response.data.role === 'Admin') {
+      router.push('/admin')
+    } else {
+      router.push('/')
+    }
+  }
+
   return (
     <>
       <div className='w-full h-screen flex flex-row'>
@@ -17,8 +83,11 @@ export default function Login() {
           />
         </div>
         <div className='w-full md:w-2/5 h-full bg-slate-100 flex justify-center items-center'>
-          <form className='relative bg-white shadow-2xl w-[350px] p-10 h-[400px] rounded-3xl flex flex-col justify-center items-center'>
-            <div className=' absolute left-10 top-7 text-sm flex gap-1 font-semibold text-origin-blue'>
+          <form
+            className='relative bg-white shadow-2xl w-[350px] p-10 min-h-fit rounded-3xl flex flex-col justify-center items-center '
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className='w-full flex justify-start  text-sm my-3 gap-1 font-semibold text-origin-blue'>
               <ArrowLeftIcon className='w-[20px] ' />
               <Link
                 href={'/'}
@@ -31,35 +100,62 @@ export default function Login() {
               Selamat Datang Kembali
             </h3>
             <div className='w-full'>
-              <h6 className='text-xs font-semibold tracking-wider mb-1'>
+              <label
+                className='form-title'
+                htmlFor='email'
+              >
                 Email
-              </h6>
+              </label>
               <input
+                placeholder='Masukkan Email'
                 type='email'
-                autoComplete='none'
-                required
-                className='block w-full py-2 px-3 border border-gray-300 placeholder-gray-500
-              text-gray-900 rounded-md mb-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10sm text-sm'
-                placeholder='Masukan email'
+                className='form-container'
+                id='email'
+                value={email}
+                {...register('email', {
+                  onChange: (e) => {
+                    setEmail(e.target.value)
+                  },
+                  validate: validateEmail,
+                })}
               />
+              {errors.email && (
+                <span
+                  className='text-red-700 text-sm my-1 inline-block'
+                  role='alert'
+                >
+                  {errors.email.message}
+                </span>
+              )}
             </div>
-            <div className='w-full'>
-              <h6 className='text-xs font-semibold tracking-wider mb-1'>
-                Password
-              </h6>
+            <div className='w-full my-3'>
               <input
+                placeholder='Masukkan Password'
                 type='password'
-                autoComplete='none'
-                required
-                className='block w-full py-2 px-3 border border-gray-300 placeholder-gray-500
-              text-gray-900 rounded-md mb-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10sm text-sm'
-                placeholder='Masukan password'
+                className='form-container'
+                id='password'
+                value={password}
+                {...register('password', {
+                  onChange: (e) => {
+                    setPassword(e.target.value)
+                  },
+                  validate: validatePassword,
+                })}
               />
+              {errors.password && (
+                <span
+                  className='text-red-700 text-sm my-1 inline-block'
+                  role='alert'
+                >
+                  {errors.password.message}
+                </span>
+              )}
             </div>
             <div className='w-full flex justify-center items-center flex-col'>
               <button
                 className='w-full flex justify-center py-2 mt-2 text-sm rounded-md
             text-white bg-[#381DDB] hover:bg-[#281496] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                type='submit'
               >
                 Masuk
               </button>
@@ -76,6 +172,10 @@ export default function Login() {
           </form>
         </div>
       </div>
+      <LoadingSpinner
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
     </>
   )
 }

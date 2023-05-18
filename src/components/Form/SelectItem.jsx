@@ -1,7 +1,8 @@
+import { useFormContext } from '@/context/form-context'
 import React from 'react'
 
 function SelectItem(props) {
-  // console.log(props)
+  const { kelengkapanData, setKelengkapanData } = useFormContext()
   return (
     <>
       <label
@@ -13,12 +14,21 @@ function SelectItem(props) {
       <select
         className='form-container cursor-pointer'
         id={props.id}
-        {...props.register(props.id, props.label)}
+        value={kelengkapanData[props.id]}
+        {...props.register(props.id, {
+          required: true,
+          onChange: (e) => {
+            setKelengkapanData({
+              ...kelengkapanData,
+              [props.id]: e.target.value,
+            })
+          },
+        })}
       >
         <option
           value={''}
           disabled
-          selected
+          selected={kelengkapanData?.agama === undefined ? true : false}
         >
           {props.defaultValue}
         </option>

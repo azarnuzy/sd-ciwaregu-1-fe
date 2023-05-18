@@ -36,6 +36,9 @@ export const jenisKelamin = [
     value: 'Laki Laki',
     params: {
       required: true,
+      onChange: (e) => {
+        // console.log(e.target)
+      },
     },
     label: 'Laki Laki',
   },
@@ -45,6 +48,9 @@ export const jenisKelamin = [
     value: 'Perempuan',
     params: {
       required: true,
+      onChange: (e) => {
+        // console.log(e.target)
+      },
     },
     label: 'Perempuan',
   },
@@ -137,10 +143,10 @@ export const pekerjaan = [
   },
 ]
 
-export const penghasilan = [
+export const penghasilanAyah = [
   {
-    name: 'penghasilan',
-    id: 'kurang1Juta',
+    name: 'penghasilanAyah',
+    id: 'kurang1JutaAyah',
     value: 'Kurang dari Rp1.000.000',
     params: {
       required: true,
@@ -148,8 +154,8 @@ export const penghasilan = [
     label: 'Kurang dari Rp1.000.000',
   },
   {
-    name: 'penghasilan',
-    id: 'antara1Sampai2Juta',
+    name: 'penghasilanAyah',
+    id: 'antara1Sampai2JutaAyah',
     value: 'Rp1.000.000 - Rp2.000.000',
     params: {
       required: true,
@@ -157,8 +163,66 @@ export const penghasilan = [
     label: 'Rp1.000.000 - Rp2.000.000',
   },
   {
-    name: 'penghasilan',
-    id: 'lebih2Juta',
+    name: 'penghasilanAyah',
+    id: 'lebih2JutaAyah',
+    value: 'Lebih dari Rp2.000.000',
+    params: {
+      required: true,
+    },
+    label: 'Lebih dari Rp2.000.000',
+  },
+]
+export const penghasilanIbu = [
+  {
+    name: 'penghasilanIbu',
+    id: 'kurang1JutaIbu',
+    value: 'Kurang dari Rp1.000.000',
+    params: {
+      required: true,
+    },
+    label: 'Kurang dari Rp1.000.000',
+  },
+  {
+    name: 'penghasilanIbu',
+    id: 'antara1Sampai2JutaIbu',
+    value: 'Rp1.000.000 - Rp2.000.000',
+    params: {
+      required: true,
+    },
+    label: 'Rp1.000.000 - Rp2.000.000',
+  },
+  {
+    name: 'penghasilanIbu',
+    id: 'lebih2JutaIbu',
+    value: 'Lebih dari Rp2.000.000',
+    params: {
+      required: true,
+    },
+    label: 'Lebih dari Rp2.000.000',
+  },
+]
+export const penghasilanWali = [
+  {
+    name: 'penghasilanWali',
+    id: 'kurang1JutaWali',
+    value: 'Kurang dari Rp1.000.000',
+    params: {
+      required: true,
+    },
+    label: 'Kurang dari Rp1.000.000',
+  },
+  {
+    name: 'penghasilanWali',
+    id: 'antara1Sampai2JutaWali',
+    value: 'Rp1.000.000 - Rp2.000.000',
+    params: {
+      required: true,
+    },
+    label: 'Rp1.000.000 - Rp2.000.000',
+  },
+  {
+    name: 'penghasilanWali',
+    id: 'lebih2JutaWali',
     value: 'Lebih dari Rp2.000.000',
     params: {
       required: true,
@@ -192,9 +256,11 @@ export const dataPage2 = [
       defaultValue: 'Pilih Salah Satu',
     },
     penghasilanInput: {
-      data: penghasilan,
+      data: penghasilanAyah,
+      id: 'penghasilanAyah',
+      value: 'penghasilanAyah',
       label: 'Penghasilan',
-      errorText: 'Penghasilan harus Diisi',
+      errorText: 'Penghasilan Ayah harus Diisi',
       params: { required: true },
     },
   },
@@ -222,9 +288,11 @@ export const dataPage2 = [
       defaultValue: 'Pilih Salah Satu',
     },
     penghasilanInput: {
-      data: penghasilan,
+      data: penghasilanIbu,
+      id: 'penghasilanIbu',
+      value: 'penghasilanIbu',
       label: 'Penghasilan',
-      errorText: 'Penghasilan harus Diisi',
+      errorText: 'Penghasilan Ibu harus Diisi',
       params: { required: true },
     },
   },
@@ -234,7 +302,7 @@ export const dataPage2 = [
       label: 'Nama Wali Kandung',
       placeholder: 'Masukan Nama Wali Kandung',
       id: 'waliName',
-      params: { required: true },
+      // params: { required: true },
       errorText: 'Nama Wali Kandung Harus Diisi',
     },
     pendidikanInput: {
@@ -252,10 +320,12 @@ export const dataPage2 = [
       defaultValue: 'Pilih Salah Satu',
     },
     penghasilanInput: {
-      data: penghasilan,
+      data: penghasilanWali,
+      id: 'penghasilanWali',
+      value: 'penghasilanIbu',
       label: 'Penghasilan',
-      errorText: 'Penghasilan harus Diisi',
-      params: { required: true },
+      errorText: 'Penghasilan Wali harus Diisi',
+      // params: { required: true },
     },
   },
 ]

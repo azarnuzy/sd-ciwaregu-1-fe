@@ -1,5 +1,6 @@
 import MainLayout from '@/layouts/MainLayout'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function SuccessSubmit() {
@@ -17,12 +18,18 @@ function SuccessSubmit() {
           <p className='font-bold text-lg'>
             Formulir pendaftaran telah berhasil dikirim
           </p>
-          <span className='underline text-blue-600 cursor-pointer'>
-            Unduh Bukti Pendaftaran
-          </span>
-          <button className='text-white bg-origin-blue px-4 py-2 cursor-pointer rounded-lg'>
-            Selesai
-          </button>
+          <Link
+            href={'/daftar-ppdb'}
+            className='underline text-blue-600 cursor-pointer'
+          >
+            Halaman Daftar PPDB
+          </Link>
+          <Link
+            href={'/'}
+            className='text-white bg-origin-blue px-4 py-2 cursor-pointer rounded-lg'
+          >
+            Halaman Utama
+          </Link>
         </div>
       </div>
     </MainLayout>

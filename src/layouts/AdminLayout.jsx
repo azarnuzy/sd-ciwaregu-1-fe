@@ -15,7 +15,7 @@ function AdminLayout({ children }) {
       <main
         className={`${
           isMounted ? 'opacity-100' : 'opacity-0'
-        } py-3 px-8 w-auto`}
+        } py-3 px-8 w-full overflow-hidden`}
       >
         {children}
       </main>
