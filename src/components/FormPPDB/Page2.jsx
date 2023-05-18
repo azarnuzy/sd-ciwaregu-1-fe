@@ -25,14 +25,12 @@ function Page2() {
     setFormData({ ...formData, [name]: files })
   }
 
-  const onSubmit = (data) => {
-    // setIdentitasDiri(data)
-    // console.log(data)
-    // nextPage()
+  const submit = (data) => {
+    nextPage()
   }
-  useEffect(() => {
-    console.log(kelengkapanData)
-  }, [kelengkapanData])
+  // useEffect(() => {
+  //   // console.log(kelengkapanData)
+  // }, [kelengkapanData])
   return (
     <div className='flex justify-center items-center flex-col'>
       <h2 className='my-8 max-w-lg font-bold text-center text-3xl mb-5 tracking-wider'>
@@ -41,7 +39,7 @@ function Page2() {
       <div className='border border-solid bg-origin-blue h-2 w-16 flex justify-center'></div>
       <form
         className='w-full my-8 px-8 sm:px-16 py-20 rounded-xl bg-white grid grid-cols-4 gap-5 shadow '
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(submit)}
       >
         <h3 className='col-span-4 uppercase tracking-wide text-gray-700 text-lg font-bold '>
           Identitas Calon Peserta Didik
@@ -251,7 +249,7 @@ function Page2() {
         <div className='col-span-4 gap-3 flex justify-end items-center'>
           <button
             className='justify-self-end bg-white text-origin-blue border-1 border-origin-blue border-solid border font-medium rounded-lg px-3 py-3'
-            type='button'
+            // type='button'
             onClick={() => {
               previousPage()
             }}
@@ -260,7 +258,8 @@ function Page2() {
           </button>
           <button
             className='justify-self-end bg-origin-blue text-white font-medium rounded-lg px-10 py-3'
-            onClick={() => nextPage()}
+            type='submit'
+            // onClick={() => nextPage()}
           >
             Selanjutnya
           </button>

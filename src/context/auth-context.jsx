@@ -27,17 +27,18 @@ export function AuthProvider({ children }) {
 
       const res = await axios
         .post(url, data)
-        .then((response) => response.data)
+        .then((response) => {
+          // console.log(response)
+          const { authentication_token, userId } = response.data.data
+          setToken(authentication_token)
+          setUserId(userId)
+          Cookies.set('token', authentication_token)
+          Cookies.set('user_id', userId)
+          return response.data
+        })
         .catch((err) => err.response.data)
 
-      const { authentication_token, userId } = res.data
-      //   console.log(res)
-      setToken(authentication_token)
-      setUserId(userId)
-      Cookies.set('token', authentication_token)
-      Cookies.set('user_id', userId)
-
-      return res.data
+      return res
       // return res
     } catch (error) {
       console.log(error)

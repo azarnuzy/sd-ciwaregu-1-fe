@@ -30,9 +30,9 @@ function Page1() {
     nextPage()
   }
 
-  useEffect(() => {
-    console.log(kelengkapanData)
-  }, [kelengkapanData])
+  // useEffect(() => {
+  //   console.log(kelengkapanData)
+  // }, [kelengkapanData])
 
   return (
     <div className='flex justify-center items-center flex-col'>

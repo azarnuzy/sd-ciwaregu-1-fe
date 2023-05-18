@@ -37,7 +37,7 @@ export const jenisKelamin = [
     params: {
       required: true,
       onChange: (e) => {
-        console.log(e.target)
+        // console.log(e.target)
       },
     },
     label: 'Laki Laki',
@@ -49,7 +49,7 @@ export const jenisKelamin = [
     params: {
       required: true,
       onChange: (e) => {
-        console.log(e.target)
+        // console.log(e.target)
       },
     },
     label: 'Perempuan',

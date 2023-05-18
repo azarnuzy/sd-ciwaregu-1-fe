@@ -3,7 +3,9 @@ import React from 'react'
 
 function InputText(props) {
   // console.log(props.errors)
+
   const { kelengkapanData, setKelengkapanData } = useFormContext()
+  // console.log();
   return (
     <>
       <label
