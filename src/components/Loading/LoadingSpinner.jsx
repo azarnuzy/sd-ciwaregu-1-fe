@@ -10,7 +10,7 @@ function LoadingSpinner({ isLoading, setIsLoading }) {
     >
       <div className='absolute top-5 right-5'>
         <XMarkIcon
-          className='font-white cursor-pointer text-[30px] text-white'
+          className='font-white w-10 h-10 cursor-pointer text-[30px] text-white'
           onClick={() => setIsLoading(false)}
         />
       </div>

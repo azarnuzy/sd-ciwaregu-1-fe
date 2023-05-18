@@ -25,13 +25,13 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = async (data) => {
-    try {
-      const url = `${process.env.NEXT_PUBLIC_BASE_URL}/v1/login`
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/v1/login`
 
-      const res = await axios
-        .post(url, data)
-        .then((response) => {
-          // console.log(response)
+    const res = await axios
+      .post(url, data)
+      .then((response) => {
+        console.log(response)
+        if (response.data.code === 200) {
           const { authentication_token, userId } = response.data.data
           setToken(authentication_token)
           setUserId(userId)
@@ -39,17 +39,21 @@ export function AuthProvider({ children }) {
             expires: 1,
           })
           Cookies.set('user_id', userId, { expires: 1 })
+        }
 
-          // console.log(router.asPath)
-          return response.data
-        })
-        .catch((err) => err.response.data)
+        return response
+      })
+      .catch((err) => {
+        console.log(err)
+        return err
+      })
 
-      return res
-      // return res
-    } catch (error) {
-      console.log(error)
-    }
+    return res.data
+    // return res
+    //   // return res
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
 
   const logout = () => {

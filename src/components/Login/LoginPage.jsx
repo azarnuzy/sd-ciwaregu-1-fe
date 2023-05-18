@@ -51,30 +51,38 @@ export default function Login() {
   const onSubmit = async (data) => {
     setIsLoading(true)
     const response = await login(data)
-    if (!response.status) {
-      if (response.message.includes('Email')) {
-        setError('email', {
-          type: 'manual',
-          message: 'Email Salah',
-        })
-      } else {
-        setError('password', {
-          type: 'manual',
-          message: 'Password Salah',
-        })
-      }
-    }
-    // console.log(response)
+    console.log(response)
     setIsLoading(false)
-
-    if (previousPath) {
-      router.push(`${previousPath}`)
-    } else {
-      if (response.data.role === 'Admin') {
-        router.push('/admin')
-      } else {
-        router.push('/')
+    if (response) {
+      if (!response?.status) {
+        if (response?.message?.includes('Email')) {
+          setError('email', {
+            type: 'manual',
+            message: 'Email Salah',
+          })
+        } else {
+          setError('password', {
+            type: 'manual',
+            message: 'Password Salah',
+          })
+        }
       }
+      // console.log(response)
+
+      if (previousPath !== '/') {
+        router.push(`${previousPath}`)
+      } else {
+        if (
+          response?.data?.role === 'Admin' ||
+          response?.data?.role === 'Teachers'
+        ) {
+          router.push('/admin')
+        }
+        if (response?.data?.role === 'Users') {
+          router.push('/')
+        }
+      }
+      setPreviousPath('/')
     }
   }
 
