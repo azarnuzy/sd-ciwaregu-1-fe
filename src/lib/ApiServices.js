@@ -6,13 +6,15 @@ const getAccessToken = () => {
   return Cookies.get('accessToken')
 }
 
-const getData = (url, params, onSuccess, onFailed, onFinish) => {
+export const getData = async (url, params, onSuccess, onFailed, onFinish) => {
   const headers = {
     Authorization: `Bearer ${getAccessToken()}`,
   }
 
-  axios
-    .get(url, {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+
+  await axios
+    .get(`${baseUrl}/${url}`, {
       params: params,
       headers: headers,
     })
@@ -29,13 +31,15 @@ const getData = (url, params, onSuccess, onFailed, onFinish) => {
     })
 }
 
-const postData = (url, data, onSuccess, onFailed, onFinish) => {
+export const postData = async (url, data, onSuccess, onFailed, onFinish) => {
   const headers = {
     Authorization: `Bearer ${getAccessToken()}`,
   }
 
-  axios
-    .post(url, data, {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+
+  await axios
+    .post(`${baseUrl}/${url}`, data, {
       headers: headers,
     })
     .then((response) => {
@@ -51,13 +55,15 @@ const postData = (url, data, onSuccess, onFailed, onFinish) => {
     })
 }
 
-const putData = (url, data, onSuccess, onFailed, onFinish) => {
+export const putData = async (url, data, onSuccess, onFailed, onFinish) => {
   const headers = {
     Authorization: `Bearer ${getAccessToken()}`,
   }
 
-  axios
-    .post(url, data, {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+
+  await axios
+    .post(`${baseUrl}/${url}`, data, {
       headers: headers,
     })
     .then((response) => {
@@ -94,3 +100,7 @@ export const registerAcc = async (data) => {
 
   return res
 }
+
+// const getProfile = async (url, params, onSuccess, onFailed, onFinish) {
+//   return getData()
+// }
