@@ -13,31 +13,31 @@ function FormProvider({ children }) {
   const [page, setPage] = useState(1)
 
   const [kelengkapanData, setKelengkapanData] = useState({
-    asalMuasal: '',
-    namaAsalSekolah: '',
-    pasPhoto: '',
-    akteLahir: '',
-    kartuKeluarga: '',
+    // asalMuasal: '',
+    // namaAsalSekolah: '',
+    // pasPhoto: null,
+    // akteLahir: null,
+    // kartuKeluarga: null,
   })
 
   const [identitasDiri, setIdentitasDiri] = useState({
-    namaLengkap: '',
-    namaPanggilan: '',
-    jenisKelamin: '',
-    tempatLahir: '',
-    tanggalLahir: '',
-    agama: '',
-    tinggiBadan: 0,
-    beratBadan: 0,
-    alamat: '',
-    rt: '',
-    rw: '',
-    KelurahanDesa: '',
-    kecamatan: '',
-    kabupaten: '',
-    provinsi: '',
-    kodePos: '',
-    noHp: '',
+    // namaLengkap: '',
+    // namaPanggilan: '',
+    // jenisKelamin: '',
+    // tempatLahir: '',
+    // tanggalLahir: '',
+    // agama: '',
+    // tinggiBadan: 0,
+    // beratBadan: 0,
+    // alamat: '',
+    // rt: '',
+    // rw: '',
+    // KelurahanDesa: '',
+    // kecamatan: '',
+    // kabupaten: '',
+    // provinsi: '',
+    // kodePos: '',
+    // noHp: '',
   })
 
   const [identitasKeluarga, setIdentitasKeluarga] = useState({

@@ -2,41 +2,50 @@ import SocialMedia from "@/components/Navbar/SocialMedia";
 import AdminLayout from "@/layouts/AdminLayout";
 import React, { useState } from "react";
 import { AddIcon } from "@/components/Icons/AddIcon";
+import axios from "axios";
+import getConfig from "next/config";
 
 export default function AddGallery() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    imageUrl: null,
+  });
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+  const handleChange = (e) => {
+    if (e.target.name === "imageUrl") {
+      setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const handleImageUrlChange = (event) => {
-    setImageUrl(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const postData = new FormData();
+      postData.append("title", formData.title);
+      postData.append("description", formData.description);
+      postData.append("imageUrl", formData.imageUrl);
 
-    fetch(`http://34.128.103.61:8000/v1/galleries`, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        title,
-        imageUrl,
-        description,
-      }).toString(),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-        navigate("admin/gallery");
+      console.log(process.env.API_KEY);
+
+      const { publicRuntimeConfig } = getConfig();
+      const apiKey = publicRuntimeConfig.API_KEY;
+      const apiUrl = publicRuntimeConfig.API_URL;
+
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${apiKey}`,
+      };
+
+      const response = await axios.post(`${apiUrl}/v1/galleries`, postData, {
+        headers: headers,
       });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -63,8 +72,8 @@ export default function AddGallery() {
                     type="text"
                     id="title"
                     name="title"
-                    value={title}
-                    onChange={handleTitleChange}
+                    value={formData.title}
+                    onChange={handleChange}
                     autoComplete="title"
                     required
                     className="my-3 w-full py-2 px-3 border border-slate-900 placeholder-black/30
@@ -80,8 +89,8 @@ export default function AddGallery() {
                   <textarea
                     id="description"
                     name="description"
-                    value={description}
-                    onChange={handleDescriptionChange}
+                    value={formData.description}
+                    onChange={handleChange}
                     autoComplete="description"
                     required
                     className="w-full my-3 py-2 px-3 border border-slate-900 placeholder-black/30
@@ -97,25 +106,16 @@ export default function AddGallery() {
                   </label>
 
                   <input
-                    class="w-full my-3 py-2 px-3 border border-slate-900 placeholder-black/30
+                    className="w-full my-3 py-2 px-3 border border-slate-900 placeholder-black/30
                     text-slate-900 rounded sm focus:outline-none focus:ring-light-purple focus:border-light-purple text-md
                     shadow-md
                     "
-                    id="file_input"
-                    type="file"
-                  />
-                </div>
-                <div className="w-full">
-                  <textarea
+                    onChange={handleChange}
                     id="imageUrl"
                     name="imageUrl"
-                    value="https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
                     autoComplete="imageUrl"
-                    onChange={handleImageUrlChange}
-                    required
-                    className="w-full hidden"
-                    rows="3"
-                  ></textarea>
+                    type="file"
+                  />
                 </div>
                 <div className="w-full flex flex-row gap-2 mt-4 justify-center">
                   <button

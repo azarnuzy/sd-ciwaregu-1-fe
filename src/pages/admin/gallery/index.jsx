@@ -2,60 +2,75 @@ import SocialMedia from "@/components/Navbar/SocialMedia";
 import AdminLayout from "@/layouts/AdminLayout";
 import React, { useState } from "react";
 import Image from "next/image";
-import content3 from "@/assets/images/content-3.jpg";
-import content4 from "@/assets/images/content-4.jpg";
-import content5 from "@/assets/images/content-5.jpg";
 import Link from "next/link";
 import { useEffect } from "react";
 import { AddIcon } from "@/components/Icons/AddIcon";
 import { EditIcon } from "@/components/Icons/EditIcon";
 import { DeleteIcon } from "@/components/Icons/DeleteIcon";
+import getConfig from "next/config";
 
-function IndexGallery() {
-  const data_gallery = [
-    {
-      id: 1,
-      image: content3,
-      kegiatan: "Kegiatan A",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse reiciendis eos quos consequuntur voluptates. Maiores tempora amet impedit quae consequuntur!",
-    },
-    {
-      id: 2,
-      image: content4,
-      kegiatan: "Kegiatan B",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse reiciendis eos quos consequuntur voluptates. Maiores tempora amet impedit quae consequuntur!",
-    },
-    {
-      id: 3,
-      image: content5,
-      kegiatan: "Kegiatan C",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse reiciendis eos quos consequuntur voluptates. Maiores tempora amet impedit quae consequuntur!",
-    },
-  ];
-
-  const [gallery, setGallery] = useState("");
-
-  const [query, setQuery] = useState("");
+export default function IndexGallery() {
+  const [galleryData, setGalleryData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    // Fetch data user active from API
-    // fetchUsersActive(query);
-    console.log(process.env.API_URL);
-    // eslint-disable-next-line
+    fetchData();
   }, []);
 
-  // async function fetchUsersActive(key) {
-  //   let uri = "";
-  //   if (key === "") uri = `${process.env.API_URL}/v1/galleries`;
-  //   else uri = `${process.env.API_URL}/api/users/active/${key}`;
+  const handleDelete = async (id) => {
+    try {
+      const { publicRuntimeConfig } = getConfig();
+      const apiUrl = publicRuntimeConfig.API_URL;
+      const apiKey = publicRuntimeConfig.API_KEY;
 
-  //   await fetch(`${process.env.API_URL}/v1/galleries`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(process.env.API_URL);
-  //       setGallery(data);
-  //     });
-  // }
+      const headers = {
+        Authorization: `Bearer ${apiKey}`,
+      };
+      console.log(apiKey);
+
+      const response = await fetch(`${apiUrl}/v1/galleries/${id}`, {
+        method: "DELETE",
+        headers: headers,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        console.error("Error:", response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const { publicRuntimeConfig } = getConfig();
+      const apiUrl = publicRuntimeConfig.API_URL;
+      const apiKey = publicRuntimeConfig.API_KEY;
+
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${apiKey}`,
+      };
+
+      const response = await fetch(`${apiUrl}/v1/galleries`, {
+        method: "GET",
+        headers: headers,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.data);
+        setGalleryData(data.data);
+      } else {
+        console.error("Error:", response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <>
@@ -93,19 +108,23 @@ function IndexGallery() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {data_gallery.map((item) => (
+              {galleryData.map((item, index) => (
                 <tr key={item.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">{item.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
                   <td className="w-[150px] px-6 py-4 whitespace-nowrap">
                     <Image
-                      src={item.image}
-                      className="object-cover w-[70px] h-[70px] rounded"
+                      src={item.imageUrl}
+                      className="object-cover rounded"
+                      width={70}
+                      height={70}
                     />
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    {item.kegiatan}
+                    {item.title}
                   </td>
-                  <td className="px-6 py-4  w-[500px] text-sm">{item.desc}</td>
+                  <td className="px-6 py-4  w-[500px] text-sm">
+                    {item.description}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap flex flex-row gap-2 justify-center items-center">
                     <Link
                       href={`/admin/gallery/edit?id=${item.id}`}
@@ -115,14 +134,14 @@ function IndexGallery() {
                       <EditIcon />
                       Edit
                     </Link>
-                    <Link
-                      href="#"
+                    <button
+                      onClick={() => handleDelete(item.id)}
                       className="text-slate-100 py-1 px-3 rounded-md text-slate-70 text-xs bg-red-600
                       flex flex-row justify-center items-center gap-1"
                     >
                       <DeleteIcon />
                       Delete
-                    </Link>
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -133,5 +152,3 @@ function IndexGallery() {
     </>
   );
 }
-
-export default IndexGallery;

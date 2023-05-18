@@ -1,4 +1,4 @@
-import { useFormContext } from '@/context/FormContext'
+import { useFormContext } from '@/context/form-context'
 import { useForm } from 'react-hook-form'
 import Page1 from './Page1'
 import Page2 from './Page2'
