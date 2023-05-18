@@ -8,41 +8,18 @@ import { EditIcon } from "@/components/Icons/EditIcon";
 import getConfig from "next/config";
 import { PeopleIcon } from "@/components/Icons/PeopleIcon";
 import { StudentIcon } from "@/components/Icons/StudentIcon";
+import { ActivityIcon } from "@/components/Icons/ActivityIcon";
+import { PrestasiIcon } from "@/components/Icons/PrestasiIcon"; 
+
 
 export default function IndexStatistik() {
-  const [galleryData, setGalleryData] = useState([]);
+  const [stats, setStats] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const handleDelete = async (id) => {
-    try {
-      const { publicRuntimeConfig } = getConfig();
-      const apiUrl = publicRuntimeConfig.API_URL;
-      const apiKey = publicRuntimeConfig.API_KEY;
-
-      const headers = {
-        Authorization: `Bearer ${apiKey}`,
-      };
-      console.log(apiKey);
-
-      const response = await fetch(`${apiUrl}/v1/galleries/${id}`, {
-        method: "DELETE",
-        headers: headers,
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-      } else {
-        console.error("Error:", response.status);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
 
   const fetchData = async () => {
     try {
@@ -55,7 +32,7 @@ export default function IndexStatistik() {
         Authorization: `Bearer ${apiKey}`,
       };
 
-      const response = await fetch(`${apiUrl}/v1/galleries`, {
+      const response = await fetch(`${apiUrl}/v1/stats`, {
         method: "GET",
         headers: headers,
       });
@@ -63,7 +40,7 @@ export default function IndexStatistik() {
       if (response.ok) {
         const data = await response.json();
         console.log(data.data);
-        setGalleryData(data.data);
+        setStats(data.data);
       } else {
         console.error("Error:", response.status);
       }
@@ -93,8 +70,8 @@ export default function IndexStatistik() {
               <PeopleIcon />
             </div>
             <div className="w-3/6 h-full flex flex-col justify-center items-center">
-              <h2 className="text-3xl font-bold text-light-purple">12</h2>
-              <p className="text-xs uppercase font-slate-500 font-semibold mt-1">
+              <h2 className="text-3xl font-bold text-light-purple">{stats.teacherCount}</h2>
+              <p className="text-xs text-center uppercase font-slate-500 font-semibold mt-1">
                 Guru & Staff
               </p>
             </div>
@@ -104,27 +81,31 @@ export default function IndexStatistik() {
               <StudentIcon />
             </div>
             <div className="w-3/6 h-full flex flex-col justify-center items-center">
-              <h2 className="text-3xl font-bold text-light-purple">12</h2>
-              <p className="text-xs uppercase font-slate-500 font-semibold mt-1">
-                Guru & Staff
+              <h2 className="text-3xl font-bold text-light-purple">{stats.studentCount}</h2>
+              <p className="text-xs text-center uppercase font-slate-500 font-semibold mt-1">
+                Siswa
               </p>
             </div>
           </div>
           <div className="w-full h-[200px] rounded-xl flex justify-center items-center flex-row border-2 border-slate-900 shadow-xl">
-            <div className="w-3/6 h-full bg-light-purple rounded-lg flex justify-center items-center text-6xl text-slate-100"></div>
+            <div className="w-3/6 h-full bg-light-purple rounded-lg flex justify-center items-center text-6xl text-slate-100">
+                <ActivityIcon/>
+            </div>
             <div className="w-3/6 h-full flex flex-col justify-center items-center">
-              <h2 className="text-3xl font-bold text-light-purple">12</h2>
-              <p className="text-xs uppercase font-slate-500 font-semibold mt-1">
-                Guru & Staff
+              <h2 className="text-3xl font-bold text-light-purple">{stats.programCount}</h2>
+              <p className="text-xs text-center uppercase font-slate-500 font-semibold mt-1">
+                Program Sekolah
               </p>
             </div>
           </div>
           <div className="w-full h-[200px] rounded-xl flex justify-center items-center flex-row border-2 border-slate-900 shadow-xl">
-            <div className="w-3/6 h-full bg-light-purple rounded-lg flex justify-center items-center text-6xl text-slate-100"></div>
+            <div className="w-3/6 h-full bg-light-purple rounded-lg flex justify-center items-center text-6xl text-slate-100">
+                <PrestasiIcon/>
+            </div>
             <div className="w-3/6 h-full flex flex-col justify-center items-center">
-              <h2 className="text-3xl font-bold text-light-purple">12</h2>
-              <p className="text-xs uppercase font-slate-500 font-semibold mt-1">
-                Guru & Staff
+              <h2 className="text-3xl font-bold text-light-purple">{stats.awardCount}</h2>
+              <p className="text-xs text-center uppercase font-slate-500 font-semibold mt-1">
+                Prestasi
               </p>
             </div>
           </div>
