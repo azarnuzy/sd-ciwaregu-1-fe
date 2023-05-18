@@ -3,7 +3,15 @@ import React from 'react'
 
 function InputText(props) {
   // console.log(props.errors)
+
   const { kelengkapanData, setKelengkapanData } = useFormContext()
+
+  let value = ''
+  if (kelengkapanData[props.name] !== undefined) {
+    value = kelengkapanData[props.name]
+  }
+
+  // console.log();
   return (
     <>
       <label
@@ -17,7 +25,7 @@ function InputText(props) {
         type={props.type}
         className='form-container'
         id={props.id}
-        value={kelengkapanData[props.name]}
+        value={value}
         {...props.register(props.name, {
           required: true,
           onChange: (e) => {
