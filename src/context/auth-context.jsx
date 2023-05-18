@@ -1,8 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
-import { useRouter } from 'next/router'
 import axios from 'axios'
-import { getData } from '@/lib/ApiServices'
+import { useRouter } from 'next/router'
 
 const AuthContext = createContext()
 
@@ -13,12 +12,12 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null)
   const [userId, setUserId] = useState()
-  // const router = useRouter()
+  const router = useRouter()
+  const [previousPath, setPreviousPath] = useState('')
 
   useEffect(() => {
     const storedToken = Cookies.get('token')
     const storedUserId = Cookies.get('user_id')
-    // console.log(Cookies.get('user_id'))
     if (storedToken && storedUserId) {
       setToken(storedToken)
       setUserId(storedUserId)
@@ -40,6 +39,8 @@ export function AuthProvider({ children }) {
             expires: 1,
           })
           Cookies.set('user_id', userId, { expires: 1 })
+
+          console.log(router.asPath)
           return response.data
         })
         .catch((err) => err.response.data)
@@ -52,25 +53,16 @@ export function AuthProvider({ children }) {
   }
 
   const logout = () => {
-    console.log('logout')
+    // console.log('logout')
     setToken(null)
     setUserId(null)
     Cookies.remove('token')
     Cookies.remove('user_id')
+    router.push('/')
   }
 
   const isAuthenticated = async () => {
-    // console.log(userId)
-    const getUser = await getData(
-      `v1/profile/${userId}`,
-      {},
-      (data) => {
-        console.log(data)
-      },
-      (message, error) => {},
-      () => {}
-    )
-    return getUser
+    return !!token
   }
 
   const authValue = {
@@ -82,6 +74,8 @@ export function AuthProvider({ children }) {
     setToken,
     userId,
     setUserId,
+    previousPath,
+    setPreviousPath,
   }
 
   return (

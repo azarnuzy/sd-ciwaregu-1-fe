@@ -16,7 +16,7 @@ export default function Login() {
     formState: { errors },
   } = useForm()
 
-  const { login } = useAuth()
+  const { login, previousPath, setPreviousPath } = useAuth()
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -64,7 +64,14 @@ export default function Login() {
         })
       }
     }
+    // console.log(response)
     setIsLoading(false)
+
+    if (previousPath) {
+      router.push(previousPath)
+      return
+    }
+
     if (response.data.role === 'Admin') {
       router.push('/admin')
     } else {
@@ -80,6 +87,7 @@ export default function Login() {
             src={content1}
             className='object-cover w-full
           h-full'
+            alt='Siswa'
           />
         </div>
         <div className='w-full md:w-2/5 h-full bg-slate-100 flex justify-center items-center'>
@@ -167,12 +175,12 @@ export default function Login() {
               </button>
               <p className='text-sm mt-5 text-slate-600'>
                 Belum memiliki akun?{' '}
-                <a
+                <Link
                   href='/register'
                   className='text-sm text-red-500'
                 >
                   Daftar disini!
-                </a>
+                </Link>
               </p>
             </div>
           </form>

@@ -73,6 +73,7 @@ export default function Register() {
             src={content1}
             className='object-cover w-full
           h-full'
+            alt='siswa'
           />
         </div>
 
@@ -219,12 +220,12 @@ export default function Register() {
               </button>
               <p className='text-sm mt-5 text-slate-600'>
                 Sudah memiliki akun?{' '}
-                <a
+                <Link
                   href='/login'
                   className='text-sm text-red-500'
                 >
                   Masuk disini!
-                </a>
+                </Link>
               </p>
             </div>
           </form>

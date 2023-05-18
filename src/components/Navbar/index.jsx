@@ -134,18 +134,18 @@ function Navbar() {
                 </div>
               ) : (
                 <>
-                  <a
+                  <Link
                     href='/login'
                     className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
                   >
                     login
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='/register'
                     className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
                   >
                     register
-                  </a>
+                  </Link>
                 </>
               )}
             </li>
@@ -253,12 +253,12 @@ function Navbar() {
                 <Link href='/daftar-ppdb'>Daftar PPDB</Link>
               </li>
               <li className='bg-white text-center p-2 px-5 rounded text-light-red px- text-sm min-[100px]'>
-                <a
+                <Link
                   href='/login'
                   className=''
                 >
                   login
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
