@@ -1,4 +1,4 @@
-import { useFormContext } from '@/context/FormContext'
+import { useFormContext } from '@/context/form-context'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import RadioButton from '../Form/RadioButton'
@@ -25,9 +25,14 @@ function Page1() {
   }
 
   const onSubmit = (data) => {
-    setKelengkapanData(data)
+    // setKelengkapanData(data)
+    // console.log(data)
     nextPage()
   }
+
+  useEffect(() => {
+    console.log(kelengkapanData)
+  }, [kelengkapanData])
 
   return (
     <div className='flex justify-center items-center flex-col'>
@@ -47,8 +52,10 @@ function Page1() {
             data={asalMuasal}
             register={register}
             errors={errors}
+            value={kelengkapanData?.asalMuasal || ''}
             label={'Asal Muasal'}
             errorText={'Asal Muasal Harus Diisi'}
+            name={'asalMuasal'}
           />
         </div>
         <div className=' col-span-4'>
@@ -59,7 +66,6 @@ function Page1() {
             placeholder={'Masukan Nama Asal Sekolah'}
             errors={errors}
             id={'namaAsalSekolah'}
-            params={{ required: true }}
             errorText={
               " Nama Asal Sekolah Harus Diisi, jika kosong silahkan isi dengan '-'"
             }
@@ -70,12 +76,7 @@ function Page1() {
           <InputFile
             id={'pasPhoto'}
             label={'Upload Pas Photo 3x4'}
-            params={{
-              required: true,
-              onChange: (e) => {
-                handleInputChange(e)
-              },
-            }}
+            handleInputChange={handleInputChange}
             register={register}
             errors={errors}
             formData={formData?.pasPhoto}
@@ -84,14 +85,20 @@ function Page1() {
         </div>
         <div className='col-span-4'>
           <InputFile
+            id={'akteLahir'}
+            label={'Surat Keterangan/Akte Lahir'}
+            handleInputChange={handleInputChange}
+            register={register}
+            errors={errors}
+            formData={formData?.akteLahir}
+            errorText={'Surat Keterangan/Akte Lahir Harus Diunggah'}
+          />
+        </div>
+        <div className='col-span-4'>
+          <InputFile
             id={'kartuKeluarga'}
             label={'Kartu Keluarga'}
-            params={{
-              required: true,
-              onChange: (e) => {
-                handleInputChange(e)
-              },
-            }}
+            handleInputChange={handleInputChange}
             register={register}
             errors={errors}
             formData={formData?.kartuKeluarga}

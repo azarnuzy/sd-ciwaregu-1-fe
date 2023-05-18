@@ -42,7 +42,7 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className='min-w-64 w-64 bg-light-red text-white font-semibold shadow-lg h-[calc(100vh-60px)]'>
+    <div className='w-64 bg-light-red text-white font-semibold shadow-lg h-[calc(100vh-60px)]'>
       <Link
         href={'/'}
         className='px-4 my-2 w-full text-2xl font-bold italic inline-block'
