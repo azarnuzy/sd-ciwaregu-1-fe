@@ -10,9 +10,53 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  const router = useRouter()
+
+  // Request interceptor
+  axios.interceptors.request.use(
+    (config) => {
+      // Modify the request config here (e.g., adding headers, modifying data)
+      return config
+    },
+    (error) => {
+      // Handle request error
+      return Promise.reject(error)
+    }
+  )
+
+  // Response interceptor
+  axios.interceptors.response.use(
+    (response) => {
+      // Process the response data here (e.g., transform response, handle success)
+      return response
+    },
+    (error) => {
+      // Handle response error based on the status code
+      if (error.response) {
+        const { status } = error.response
+
+        // Redirect to the appropriate page based on the status code
+        if (status === 401) {
+          // Unauthorized - Redirect to the unauthorized page
+          router.push('/unauthorized')
+        } else if (status === 403) {
+          // Forbidden - Redirect to the home page
+          router.push('/')
+        } else if (status === 404) {
+          // Not Found - Redirect to the error page
+          router.push('/error')
+        } else if (status === 500) {
+          // Internal Server Error - Redirect to the error page
+          router.push('/error')
+        }
+      }
+
+      // Return the error to the caller
+      return Promise.reject(error)
+    }
+  )
   const [token, setToken] = useState(null)
   const [userId, setUserId] = useState()
-  const router = useRouter()
   const [previousPath, setPreviousPath] = useState('/')
 
   useEffect(() => {
