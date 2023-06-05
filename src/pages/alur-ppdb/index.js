@@ -64,9 +64,7 @@ function AlurPPDB() {
                 height={200}
               />
               <p className='font-bold text-center'>
-                Calon peserta didik baru melakukan pendaftaran akun terlebih
-                dahulu kemudian mengisi form pendaftaran peserta didik baru
-                secara online
+                Calon peserta didik baru mengunggah dokumen persyaratan
               </p>
             </div>
             <div className='flex items-center justify-center'>
@@ -85,7 +83,9 @@ function AlurPPDB() {
                 height={200}
               />
               <p className='font-bold text-center'>
-                Calon peserta didik baru mengunggah dokumen persyaratan
+                Calon peserta didik baru melakukan pendaftaran akun terlebih
+                dahulu kemudian mengisi form pendaftaran peserta didik baru
+                secara online
               </p>
             </div>
           </div>

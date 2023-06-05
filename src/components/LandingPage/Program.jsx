@@ -13,12 +13,7 @@ function Program() {
           Program Sekolah
         </h2>
         <p className="text-light-dark text-">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis iste
-          mollitia et sunt consequatur fuga natus maiores. Hic dolore eum aut ab
-          facere incidunt doloremque, minima voluptatem dolores sunt culpa
-          repudiandae consequatur ipsam harum exercitationem nemo! Autem cumque,
-          quasi vitae provident odit atque fugiat? Totam commodi voluptatum
-          architecto deserunt dolores!
+        Pada bagian Program Sekolah, disajikan informasi tentang berbagai program dan kegiatan yang dijalankan di sekolah SDN Ciwaregu. Tujuan dari program kerja ini adalah untuk memberikan gambaran tentang upaya kami dalam meningkatkan kualitas pendidikan dan pengalaman siswa di lingkungan sekolah.
         </p>
         <a
           href="#"
