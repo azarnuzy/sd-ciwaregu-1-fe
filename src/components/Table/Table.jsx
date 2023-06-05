@@ -9,6 +9,7 @@ import LoadingSpinner from '../Loading/LoadingSpinner'
 import axios from 'axios'
 import { useAuth } from '@/context/auth-context'
 import Notification from '../Loading/Notification'
+import Link from 'next/link'
 
 function Table({ data, currentPage, setVerifiedData, setData }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -107,7 +108,11 @@ function Table({ data, currentPage, setVerifiedData, setData }) {
               </td>
               <td className='px-6 py-2 whitespace-nowrap'>{item.status}</td>
               <td className='px-6 py-2 whitespace-nowrap flex justify-center gap-2'>
-                <button className='text-white rounded-md px-2 py-1 bg-origin-blue items-center justify-center flex gap-1'>
+                <Link
+                  href={`/admin/ppdb/${item.id}`}
+                  className='text-white rounded-md px-2 py-1 bg-origin-blue items-center justify-center flex gap-1'
+                  target='_blank'
+                >
                   <Image
                     src={'/images/u_save.svg'}
                     alt='Save images'
@@ -115,7 +120,7 @@ function Table({ data, currentPage, setVerifiedData, setData }) {
                     height={18}
                   />{' '}
                   View
-                </button>
+                </Link>
                 <button
                   className={` rounded-md px-2 py-1  flex items-center justify-center gap-1 ${
                     item.status === 'verified'
