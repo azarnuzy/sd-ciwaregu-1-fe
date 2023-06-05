@@ -1,99 +1,89 @@
 import SocialMedia from '@/components/Navbar/SocialMedia'
+import Pagination from '@/components/Table/Pagination'
+import Table from '@/components/Table/Table'
+import { useAuth } from '@/context/auth-context'
 import AdminLayout from '@/layouts/AdminLayout'
 import { TrashIcon } from '@heroicons/react/24/solid'
+import axios from 'axios'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 function AdminPPDB() {
-  const data = [
-    {
-      id: 1,
-      noPendaftaran: '123456',
-      nama: 'John Doe',
-      email: 'johndoe@example.com',
-      tanggalSubmit: '2023-05-15',
-    },
-    {
-      id: 2,
-      noPendaftaran: '123456',
-      nama: 'John Doe',
-      email: 'johndoe@example.com',
-      tanggalSubmit: '2023-05-15',
-    },
-    {
-      id: 3,
-      noPendaftaran: '123456',
-      nama: 'John Doe',
-      email: 'johndoe@example.com',
-      tanggalSubmit: '2023-05-15',
-    },
-    {
-      id: 4,
-      noPendaftaran: '123456',
-      nama: 'John Doe',
-      email: 'johndoe@example.com',
-      tanggalSubmit: '2023-05-15',
-    },
-    // Add more data objects as needed
-  ]
+  const [data, setData] = useState()
+  const [currentPage, setCurrentPage] = useState(1)
+  const [searchTerm, setSearchTerm] = useState('')
+  const recordsPerPage = 10
+  const [isLoading, setIsLoading] = useState(false)
+  const { token } = useAuth()
+  const [verifiedData, setVerifiedData] = useState([])
+
+  useEffect(() => {
+    const getHasilPPDB = async () => {
+      await axios
+        .get(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/hasilPpdb/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setData(response.data.data)
+          // console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+    getHasilPPDB()
+  }, [token, verifiedData])
+
+  // Calculate pagination values
+  const filteredData = data?.filter((item) =>
+    item.namaLengkap.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+  const totalRecords = filteredData?.length
+  const totalPages = Math.ceil(totalRecords / recordsPerPage)
+  const indexOfLastRecord = currentPage * recordsPerPage
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
+  const currentData = filteredData?.slice(indexOfFirstRecord, indexOfLastRecord)
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+  }
+
+  // Handle search term change
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value)
+    setCurrentPage(1)
+  }
+
   return (
     <>
       <SocialMedia />
       <AdminLayout>
-        <h1 className='font-bold text-2xl my-4'>Hasil PPDB</h1>
-        <div className='overflow-x-scroll  scrollbar-thumb-light-red scrollbar-thin scrollbar-track-slate-200 lg:scrollbar-track-transparent scrollbar-thumb-rounded'>
-          <table className='min-w-full bg-white'>
-            <thead>
-              <tr>
-                <th className='px-6 py-3 bg-gray-200 text-left text-xs font-medium text-gray-600 uppercase tracking-wider'>
-                  ID
-                </th>
-                <th className='px-6 py-3 bg-gray-200 text-left text-xs font-medium text-gray-600 uppercase tracking-wider'>
-                  No Pendaftaran
-                </th>
-                <th className='px-6 py-3 bg-gray-200 text-left text-xs font-medium text-gray-600 uppercase tracking-wider'>
-                  Nama Calon Peserta Didik
-                </th>
-                <th className='px-6 py-3 bg-gray-200 text-left text-xs font-medium text-gray-600 uppercase tracking-wider'>
-                  Email
-                </th>
-                <th className='px-6 py-3 bg-gray-200 text-left text-xs font-medium text-gray-600 uppercase tracking-wider'>
-                  Tanggal Submit
-                </th>
-                <th className='px-6 py-3 bg-gray-200'>Action</th>
-              </tr>
-            </thead>
-            <tbody className='divide-y divide-gray-200'>
-              {data.map((item) => (
-                <tr key={item.id}>
-                  <td className='px-6 py-4 whitespace-nowrap'>{item.id}</td>
-                  <td className='px-6 py-4 whitespace-nowrap'>
-                    {item.noPendaftaran}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap'>{item.nama}</td>
-                  <td className='px-6 py-4 whitespace-nowrap'>{item.email}</td>
-                  <td className='px-6 py-4 whitespace-nowrap'>
-                    {item.tanggalSubmit}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap flex justify-center gap-2'>
-                    <button className='text-white rounded-md px-2 py-1 bg-origin-blue items-center justify-center flex gap-1'>
-                      <Image
-                        src={'/images/u_save.svg'}
-                        alt='Save images'
-                        width={18}
-                        height={18}
-                      />{' '}
-                      View
-                    </button>
-                    <button className='text-white rounded-md px-2 py-1 bg-light-red flex items-center justify-center gap-1'>
-                      <TrashIcon className='w-[18px]' /> Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <h1 className='font-bold text-2xl my-2'>Hasil PPDB</h1>
+        <div className='mb-4'>
+          <input
+            type='text'
+            placeholder='Search by name...'
+            value={searchTerm}
+            onChange={handleSearch}
+            className='border border-gray-300 rounded px-4 py-2 w-full'
+          />
         </div>
+        <div className='overflow-scroll  scrollbar-thumb-light-red scrollbar-thin scrollbar-track-slate-200 lg:scrollbar-track-transparent scrollbar-thumb-rounded max-h-[60vh]'>
+          <Table
+            data={currentData}
+            setData={setData}
+            currentPage={currentPage}
+            setVerifiedData={setVerifiedData}
+          />
+        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </AdminLayout>
     </>
   )

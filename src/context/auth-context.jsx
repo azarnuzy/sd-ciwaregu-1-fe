@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -58,6 +58,19 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(null)
   const [userId, setUserId] = useState()
   const [previousPath, setPreviousPath] = useState('/')
+
+  const [open, setOpen] = useState(false)
+  const eventDateRef = useRef(new Date())
+  const timerRef = useRef(0)
+
+  const handleNotification = () => {
+    setOpen(false)
+    window.clearTimeout(timerRef.current)
+    timerRef.current = window.setTimeout(() => {
+      // eventDateRef.current = oneWeekAway()
+      setOpen(true)
+    }, 100)
+  }
 
   useEffect(() => {
     const storedToken = Cookies.get('token')
@@ -124,6 +137,11 @@ export function AuthProvider({ children }) {
     setUserId,
     previousPath,
     setPreviousPath,
+    open,
+    setOpen,
+    eventDateRef,
+    timerRef,
+    handleNotification,
   }
 
   return (
