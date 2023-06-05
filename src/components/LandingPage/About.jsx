@@ -28,12 +28,8 @@ function About() {
             Tentang Sekolah
           </h2>
           <p className="text-light-dark text-">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis iste
-            mollitia et sunt consequatur fuga natus maiores. Hic dolore eum aut
-            ab facere incidunt doloremque, minima voluptatem dolores sunt culpa
-            repudiandae consequatur ipsam harum exercitationem nemo! Autem
-            cumque, quasi vitae provident odit atque fugiat? Totam commodi
-            voluptatum architecto deserunt dolores!
+          SDN Ciwaregu yang terletak di Cikalong Kulon, Cianjur, Jawa Barat, Indonesia merupakan sekolah yang menyediakan pendidikan dasar untuk siswa-siswi dari kelas 1 hingga kelas 6 dengan jumlah siswa-siswi sekitar 400 orang dan guru sebanyak 13 orang. SDN Ciwaregu berdedikasi untuk memberikan pendidikan berkualitas tinggi kepada para siswa nya dengan tujuan  membentuk masa depan yang cerah dan berkarakter bagi setiap siswa kami.
+          
           </p>
           <a
             href="#"
