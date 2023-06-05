@@ -6,13 +6,15 @@ const getAccessToken = () => {
   return Cookies.get('accessToken')
 }
 
-const getData = (url, params, onSuccess, onFailed, onFinish) => {
+export const getData = async (url, params, onSuccess, onFailed, onFinish) => {
   const headers = {
     Authorization: `Bearer ${getAccessToken()}`,
   }
 
-  axios
-    .get(url, {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+
+  await axios
+    .get(`${baseUrl}/${url}`, {
       params: params,
       headers: headers,
     })
@@ -29,13 +31,15 @@ const getData = (url, params, onSuccess, onFailed, onFinish) => {
     })
 }
 
-const postData = (url, data, onSuccess, onFailed, onFinish) => {
+export const postData = async (url, data, onSuccess, onFailed, onFinish) => {
   const headers = {
     Authorization: `Bearer ${getAccessToken()}`,
   }
 
-  axios
-    .post(url, data, {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+
+  await axios
+    .post(`${baseUrl}/${url}`, data, {
       headers: headers,
     })
     .then((response) => {
@@ -51,13 +55,15 @@ const postData = (url, data, onSuccess, onFailed, onFinish) => {
     })
 }
 
-const putData = (url, data, onSuccess, onFailed, onFinish) => {
+export const putData = async (url, data, onSuccess, onFailed, onFinish) => {
   const headers = {
     Authorization: `Bearer ${getAccessToken()}`,
   }
 
-  axios
-    .post(url, data, {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+
+  await axios
+    .post(`${baseUrl}/${url}`, data, {
       headers: headers,
     })
     .then((response) => {
@@ -74,7 +80,7 @@ const putData = (url, data, onSuccess, onFailed, onFinish) => {
 }
 
 export const login = async (data) => {
-  const url = `${process.env.BASE_URL}/v1/login`
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/v1/login`
 
   const res = await axios
     .post(url, data)
@@ -83,3 +89,18 @@ export const login = async (data) => {
 
   return res
 }
+
+export const registerAcc = async (data) => {
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/v1/register`
+
+  const res = await axios
+    .post(url, data)
+    .then((response) => response.data)
+    .catch((err) => err.response.data)
+
+  return res
+}
+
+// const getProfile = async (url, params, onSuccess, onFailed, onFinish) {
+//   return getData()
+// }

@@ -1,9 +1,11 @@
+import { useAuth } from '@/context/auth-context'
 import { Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   ChevronDownIcon,
   EnvelopeIcon,
   PhoneIcon,
+  UserCircleIcon,
   XMarkIcon,
 } from '@heroicons/react/24/solid'
 import Link from 'next/link'
@@ -15,15 +17,18 @@ const menuData = [
   { id: 2, label: 'Program', url: '/profile/program' },
   { id: 3, label: 'Fasilitas', url: '/profile/fasilitas' },
   { id: 4, label: 'Informasi Sekolah', url: '/profile/informasi-sekolah' },
-  { id: 5, label: 'Guru & Staff', url: 'guru-staff' },
+  { id: 5, label: 'Guru & Staff', url: '/guru-staff' },
 ]
 function Navbar() {
   const [isActive, setIsActive] = useState(false)
   const router = useRouter()
-  const [isHover, setIsHover] = useState(false)
 
+  const { token, logout } = useAuth()
+
+  // console.log(token)
   const path = router.pathname
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
 
   return (
     <>
@@ -46,7 +51,7 @@ function Navbar() {
               <button
                 onMouseEnter={() => setIsMenuOpen(true)}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className='700   py-2 rounded inline-flex items-center'
+                className=' py-2 rounded inline-flex items-center'
               >
                 <span className=' uppercase items-center font-semibold '>
                   Profile
@@ -79,19 +84,6 @@ function Navbar() {
                 </div>
               </Transition>
             </li>
-            {/* <li
-              onMouseEnter={() => {
-                setIsHover(true)
-              }}
-              onMouseLeave={() => setIsHover(false)}
-              className={`max-w-[60px] ${
-                isHover
-                  ? ' '
-                  : 'overflow-hidden text-ellipsis whitespace-nowrap'
-              }   `}
-            >
-              <Link href='/guru-staff'>guru & staff</Link>
-            </li> */}
             <li>
               <Link href='/gallery'>galeri</Link>
             </li>
@@ -102,18 +94,60 @@ function Navbar() {
               <Link href='/daftar-ppdb'>Daftar PPDB</Link>
             </li>
             <li className='flex gap-2'>
-              <a
-                href='/login'
-                className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
-              >
-                login
-              </a>
-              <a
-                href='/register'
-                className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
-              >
-                register
-              </a>
+              {token ? (
+                <div className='relative'>
+                  <button
+                    onMouseEnter={() => setIsProfileOpen(true)}
+                    onClick={() => setIsProfileOpen(!isProfileOpen)}
+                    className=' py-2 rounded inline-flex items-center'
+                  >
+                    <UserCircleIcon className='h-12 w-12 bg-gray-400 cursor-pointer rounded-full' />
+                  </button>
+                  <Transition
+                    show={isProfileOpen}
+                    enter='transition ease-out duration-100'
+                    enterFrom='transform opacity-0 scale-95'
+                    enterTo='transform opacity-100 scale-100'
+                    leave='transition ease-in duration-75'
+                    leaveFrom='transform opacity-100 scale-100'
+                    leaveTo='transform opacity-0 scale-95'
+                  >
+                    <div
+                      className='absolute right-0 py-2 w-36 bg-white rounded-md shadow-lg  flex flex-col'
+                      onMouseEnter={() => setIsProfileOpen(true)}
+                      onMouseLeave={() => setIsProfileOpen(false)}
+                    >
+                      <Link
+                        href={'/akun'}
+                        className='w-full text-start block px-4 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer'
+                      >
+                        Profile
+                      </Link>
+                      <button
+                        className='w-full text-start block px-4 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer'
+                        onClick={() => logout()}
+                      >
+                        LOGOUT
+                      </button>
+                    </div>
+                  </Transition>
+                </div>
+              ) : (
+                <>
+                  <Link
+                    href='/login'
+                    className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
+                  >
+                    login
+                  </Link>
+                  <Link
+                    href='/register'
+                    className='bg-white p-2 px-5 rounded text-light-red px- text-sm'
+                  >
+                    register
+                  </Link>
+                </>
+              )}
             </li>
           </ul>
         </div>
@@ -219,12 +253,12 @@ function Navbar() {
                 <Link href='/daftar-ppdb'>Daftar PPDB</Link>
               </li>
               <li className='bg-white text-center p-2 px-5 rounded text-light-red px- text-sm min-[100px]'>
-                <a
+                <Link
                   href='/login'
                   className=''
                 >
                   login
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

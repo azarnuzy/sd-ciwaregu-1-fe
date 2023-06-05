@@ -1,6 +1,5 @@
 import { useFormContext } from '@/context/form-context'
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import InputText from '../Form/InputText'
 import { dataPage2, pendidikan } from '@/utils/form'
 import SelectItem from '../Form/SelectItem'
@@ -8,17 +7,17 @@ import RadioButton from '../Form/RadioButton'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import LoadingSpinner from '../Loading/LoadingSpinner'
+import { useAuth } from '@/context/auth-context'
 
 function Page3() {
   const { kelengkapanData, register, handleSubmit, errors, previousPage } =
     useFormContext()
   const [isLoading, setIsLoading] = useState(false)
 
+  const { token } = useAuth()
   const router = useRouter()
 
   const onSubmit = (data) => {
-    // previousPage()
-    // console.log(kelengkapanData)
     setIsLoading(true)
     const postData = async () => {
       try {
@@ -61,7 +60,12 @@ function Page3() {
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_BASE_URL}/v1/ppdb`,
           formData,
-          { headers: { 'Content-Type': 'multipart/form-data' } }
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: `Bearer ${token}`,
+            },
+          }
         )
         // console.log(response.data)
         router.push('/daftar-ppdb/success')

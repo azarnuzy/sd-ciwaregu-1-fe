@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import content1 from '../../assets/images/content-1.jpg'
-import SecondNavbar from '../Navbar/SecondNavbar'
 import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
-import InputText from '../Form/InputText'
 import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/router'
 import LoadingSpinner from '../Loading/LoadingSpinner'
@@ -14,23 +12,77 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    getValues,
+    setError,
     formState: { errors },
   } = useForm()
 
-  const { login } = useAuth()
+  const { login, previousPath, setPreviousPath } = useAuth()
   const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const validateEmail = (value) => {
+    if (!value) {
+      return 'Email Harus Diisi'
+    }
+    // Regular expression for email validation
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
+    // console.log(!emailRegex.test(value))
+    if (!emailRegex.test(value)) {
+      return 'Format Email Salah'
+    }
+    return true
+  }
+
+  const validatePassword = (value) => {
+    if (!value) {
+      return 'Password Harus Diisi'
+    }
+    // Regular expression for password validation
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d.*\d)[A-Za-z\d]{8,}$/
+    if (!passwordRegex.test(value)) {
+      return 'Password harus mengandung 8 karakter, 1 kapital, dan 2 nomor'
+    }
+    return true
+  }
 
   const onSubmit = async (data) => {
     setIsLoading(true)
     const response = await login(data)
+    console.log(response)
     setIsLoading(false)
-    if (response.role === 'Admin') {
-      router.push('/admin')
-    } else {
-      router.push('/')
+    if (response) {
+      if (!response?.status) {
+        if (response?.message?.includes('Email')) {
+          setError('email', {
+            type: 'manual',
+            message: 'Email Salah',
+          })
+        } else {
+          setError('password', {
+            type: 'manual',
+            message: 'Password Salah',
+          })
+        }
+      }
+      // console.log(response)
+
+      if (previousPath !== '/') {
+        router.push(`${previousPath}`)
+      } else {
+        if (
+          response?.data?.role === 'Admin' ||
+          response?.data?.role === 'Teachers'
+        ) {
+          router.push('/admin')
+        }
+        if (response?.data?.role === 'Users') {
+          router.push('/')
+        }
+      }
+      setPreviousPath('/')
     }
   }
 
@@ -42,6 +94,7 @@ export default function Login() {
             src={content1}
             className='object-cover w-full
           h-full'
+            alt='Siswa'
           />
         </div>
         <div className='w-full md:w-2/5 h-full bg-slate-100 flex justify-center items-center'>
@@ -62,35 +115,62 @@ export default function Login() {
               Selamat Datang Kembali
             </h3>
             <div className='w-full'>
-              <InputText
-                name={'email'}
-                type={'email'}
-                label={'Email'}
-                placeholder={'Masukan Email'}
-                errors={errors}
-                id={'email'}
-                params={{ required: true, pattern: /^\S+@\S+$/i }}
-                errorText={'Email Harus Diisi'}
-                register={register}
+              <label
+                className='form-title'
+                htmlFor='email'
+              >
+                Email
+              </label>
+              <input
+                placeholder='Masukkan Email'
+                type='email'
+                className='form-container'
+                id='email'
+                value={email}
+                {...register('email', {
+                  onChange: (e) => {
+                    setEmail(e.target.value)
+                  },
+                  validate: validateEmail,
+                })}
               />
+              {errors.email && (
+                <span
+                  className='text-red-700 text-sm my-1 inline-block'
+                  role='alert'
+                >
+                  {errors.email.message}
+                </span>
+              )}
             </div>
             <div className='w-full my-3'>
-              <InputText
-                name={'password'}
-                type={'password'}
-                label={'Password'}
-                placeholder={'Masukan Password'}
-                errors={errors}
-                id={'password'}
-                params={{
-                  required: true,
-                  pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
-                }}
-                errorText={
-                  ' Password Harus Diisi dan Mengandung 8 Karakter, 1 Huruf Besar, 1 Huruf Kecil, dan 1 Simbol'
-                }
-                register={register}
+              <label
+                className='form-title'
+                htmlFor='password'
+              >
+                Password
+              </label>
+              <input
+                placeholder='Masukkan Password'
+                type='password'
+                className='form-container'
+                id='password'
+                value={password}
+                {...register('password', {
+                  onChange: (e) => {
+                    setPassword(e.target.value)
+                  },
+                  validate: validatePassword,
+                })}
               />
+              {errors.password && (
+                <span
+                  className='text-red-700 text-sm my-1 inline-block'
+                  role='alert'
+                >
+                  {errors.password.message}
+                </span>
+              )}
             </div>
             <div className='w-full flex justify-center items-center flex-col'>
               <button
@@ -102,12 +182,12 @@ export default function Login() {
               </button>
               <p className='text-sm mt-5 text-slate-600'>
                 Belum memiliki akun?{' '}
-                <a
+                <Link
                   href='/register'
                   className='text-sm text-red-500'
                 >
                   Daftar disini!
-                </a>
+                </Link>
               </p>
             </div>
           </form>
