@@ -3,7 +3,7 @@ import Navbar from '../Navbar'
 
 function HeaderComponent() {
   return (
-    <div className='bg-hero bg-no-repeat bg-cover w-full h-screen sm:h-[95vh] relative object-center'>
+    <div className='bg-hero bg-center bg-no-repeat bg-cover w-full h-screen sm:h-[95vh] relative object-center'>
       <div className='absolute w-full h-screen sm:h-[95vh] bg-gradient-to-r from-black to-light-purple opacity-30'></div>
       <Navbar />
       <div className='px-4 sm:mx-0 h-screen absolute w-full sm:h-[95vh] flex flex-col justify-center items-center'>
