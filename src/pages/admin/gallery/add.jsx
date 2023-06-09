@@ -36,7 +36,7 @@ export default function AddGallery() {
         Authorization: `Bearer ${token}`,
       }
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URLl}/v1/galleries`, postData, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/galleries`, postData, {
         headers: headers,
       })
       console.log(response.data)
