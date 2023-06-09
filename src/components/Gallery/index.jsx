@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import getConfig from "next/config";
-import content3 from "../../assets/images/content-3.jpg";
-import content4 from "../../assets/images/content-4.jpg";
-import content5 from "../../assets/images/content-5.jpg";
+import { useAuth } from '@/context/auth-context'
 
 export default function Index() {
   const [galleryData, setGalleryData] = useState([]);
@@ -12,18 +10,15 @@ export default function Index() {
     fetchData();
   }, []);
 
+  const { token } = useAuth()
   const fetchData = async () => {
     try {
-      const { publicRuntimeConfig } = getConfig();
-      const apiUrl = publicRuntimeConfig.API_URL;
-      const apiKey = publicRuntimeConfig.API_KEY;
-
       const headers = {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${token}`,
       };
 
-      const response = await fetch(`${apiUrl}/v1/galleries`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/galleries`, {
         method: "GET",
         headers: headers,
       });
