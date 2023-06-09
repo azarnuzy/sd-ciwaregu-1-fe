@@ -31,16 +31,12 @@ export default function AddGallery() {
       postData.append('description', formData.description)
       postData.append('imageUrl', formData.imageUrl)
 
-      const { publicRuntimeConfig } = getConfig()
-      const apiKey = publicRuntimeConfig.API_KEY
-      const apiUrl = publicRuntimeConfig.API_URL
-
       const headers = {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       }
 
-      const response = await axios.post(`${apiUrl}/v1/galleries`, postData, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URLl}/v1/galleries`, postData, {
         headers: headers,
       })
       console.log(response.data)
