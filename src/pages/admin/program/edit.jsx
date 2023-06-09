@@ -24,16 +24,13 @@ export default function EditProgram() {
 
   const fetchData = async () => {
     try {
-      const { publicRuntimeConfig } = getConfig()
-      const apiUrl = publicRuntimeConfig.API_URL
-      const apiKey = publicRuntimeConfig.API_KEY
 
       const headers = {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       }
 
-      const response = await fetch(`${apiUrl}/v1/programs/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/programs/${id}`, {
         method: 'GET',
         headers: headers,
       })
@@ -61,18 +58,14 @@ export default function EditProgram() {
       postData.append('name', programData.name)
       postData.append('goal', programData.goal)
 
-      const { publicRuntimeConfig } = getConfig()
-      const apiKey = publicRuntimeConfig.API_KEY
-      const apiUrl = publicRuntimeConfig.API_URL
-
       console.log(postData)
       const headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${token}`,
       }
 
       const response = await axios.put(
-        `${apiUrl}/v1/programs/${id}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/v1/programs/${id}`,
         postData.toString(),
         {
           headers: headers,

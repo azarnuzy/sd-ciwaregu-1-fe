@@ -27,17 +27,13 @@ export default function AddProgram() {
       postData.append('name', formData.name)
       postData.append('goal', formData.goal)
 
-      const { publicRuntimeConfig } = getConfig()
-      const apiKey = publicRuntimeConfig.API_KEY
-      const apiUrl = publicRuntimeConfig.API_URL
-
       const headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         Authorization: `Bearer ${token}`,
       }
 
       const response = await axios.post(
-        `${apiUrl}/v1/programs`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/v1/programs`,
         postData.toString(),
         {
           headers: headers,
