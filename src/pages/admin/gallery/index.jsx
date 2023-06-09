@@ -19,9 +19,6 @@ export default function IndexGallery() {
   const { token } = useAuth()
   const handleDelete = async (id) => {
     try {
-      const { publicRuntimeConfig } = getConfig()
-      const apiUrl = publicRuntimeConfig.API_URL
-      const apiKey = publicRuntimeConfig.API_KEY
 
       const headers = {
         Authorization: `Bearer ${token}`,
