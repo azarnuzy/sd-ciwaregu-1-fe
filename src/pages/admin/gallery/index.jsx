@@ -28,7 +28,7 @@ export default function IndexGallery() {
       }
       console.log(apiKey)
 
-      const response = await fetch(`${apiUrl}/v1/galleries/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/galleries/${id}`, {
         method: 'DELETE',
         headers: headers,
       })
