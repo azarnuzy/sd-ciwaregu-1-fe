@@ -41,7 +41,7 @@ export function AuthProvider({ children }) {
           router.push('/unauthorized')
         } else if (status === 403) {
           // Forbidden - Redirect to the home page
-          // router.push('/')
+          router.push('/unauthorized')
         } else if (status === 404) {
           // Not Found - Redirect to the error page
           router.push('/error')

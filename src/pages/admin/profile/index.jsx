@@ -24,15 +24,11 @@ export default function IndexGuruStaff() {
 
   const fetchData = async () => {
     try {
-      const { publicRuntimeConfig } = getConfig()
-      const apiUrl = publicRuntimeConfig.API_URL
-      const apiKey = publicRuntimeConfig.API_KEY
-
       const headers = {
         Authorization: `Bearer ${token}`,
       }
 
-      const response = await fetch(`${apiUrl}/v1/users`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/users`, {
         method: 'GET',
         headers: headers,
       })

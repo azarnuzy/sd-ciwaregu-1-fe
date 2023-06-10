@@ -9,10 +9,12 @@ import { EditIcon } from '@/components/Icons/EditIcon'
 import { DeleteIcon } from '@/components/Icons/DeleteIcon'
 import getConfig from 'next/config'
 import { useRouter } from 'next/router'
+import { useAuth } from '@/context/auth-context'
 
 export default function IndexGuruStaff() {
   const router = useRouter()
   const [guruStaffData, setGuruStaffData] = useState([])
+  const { token } = useAuth()
 
   useEffect(() => {
     fetchData()
@@ -20,16 +22,12 @@ export default function IndexGuruStaff() {
 
   const handleDelete = async (id) => {
     try {
-      const { publicRuntimeConfig } = getConfig()
-      const apiUrl = publicRuntimeConfig.API_URL
-      const apiKey = publicRuntimeConfig.API_KEY
 
       const headers = {
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${token}`,
       }
-      console.log(apiKey)
 
-      const response = await fetch(`${apiUrl}/v1/teachers/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/teachers/${id}`, {
         method: 'DELETE',
         headers: headers,
       })
@@ -48,16 +46,13 @@ export default function IndexGuruStaff() {
 
   const fetchData = async () => {
     try {
-      const { publicRuntimeConfig } = getConfig()
-      const apiUrl = publicRuntimeConfig.API_URL
-      const apiKey = publicRuntimeConfig.API_KEY
 
       const headers = {
         'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${token}`,
       }
 
-      const response = await fetch(`${apiUrl}/v1/teachers`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/teachers`, {
         method: 'GET',
         headers: headers,
       })

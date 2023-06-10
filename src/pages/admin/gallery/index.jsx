@@ -19,16 +19,13 @@ export default function IndexGallery() {
   const { token } = useAuth()
   const handleDelete = async (id) => {
     try {
-      const { publicRuntimeConfig } = getConfig()
-      const apiUrl = publicRuntimeConfig.API_URL
-      const apiKey = publicRuntimeConfig.API_KEY
 
       const headers = {
         Authorization: `Bearer ${token}`,
       }
       console.log(apiKey)
 
-      const response = await fetch(`${apiUrl}/v1/galleries/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/galleries/${id}`, {
         method: 'DELETE',
         headers: headers,
       })

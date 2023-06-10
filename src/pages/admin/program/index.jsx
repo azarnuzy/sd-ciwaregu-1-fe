@@ -23,16 +23,12 @@ export default function IndexProgram() {
 
   const handleDelete = async (id) => {
     try {
-      const { publicRuntimeConfig } = getConfig()
-      const apiUrl = publicRuntimeConfig.API_URL
-      const apiKey = publicRuntimeConfig.API_KEY
 
       const headers = {
         Authorization: `Bearer ${token}`,
       }
-      console.log(apiKey)
 
-      const response = await fetch(`${apiUrl}/v1/programs/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/programs/${id}`, {
         method: 'DELETE',
         headers: headers,
       })
@@ -51,16 +47,13 @@ export default function IndexProgram() {
 
   const fetchData = async () => {
     try {
-      const { publicRuntimeConfig } = getConfig()
-      const apiUrl = publicRuntimeConfig.API_URL
-      const apiKey = publicRuntimeConfig.API_KEY
 
       const headers = {
         'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${token}`,
       }
 
-      const response = await fetch(`${apiUrl}/v1/programs`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/programs`, {
         method: 'GET',
         headers: headers,
       })

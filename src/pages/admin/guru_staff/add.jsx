@@ -35,16 +35,12 @@ export default function AddGuruStaff() {
       postData.append('email', formData.email)
       postData.append('imageUrl', formData.imageUrl)
 
-      const { publicRuntimeConfig } = getConfig()
-      const apiKey = publicRuntimeConfig.API_KEY
-      const apiUrl = publicRuntimeConfig.API_URL
-
       const headers = {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       }
 
-      const response = await axios.post(`${apiUrl}/v1/teachers`, postData, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/teachers`, postData, {
         headers: headers,
       })
       console.log(response.data)
