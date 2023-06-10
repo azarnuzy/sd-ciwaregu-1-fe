@@ -43,16 +43,13 @@ export default function IndexGallery() {
 
   const fetchData = async () => {
     try {
-      const { publicRuntimeConfig } = getConfig()
-      const apiUrl = publicRuntimeConfig.API_URL
-      const apiKey = publicRuntimeConfig.API_KEY
 
       const headers = {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       }
 
-      const response = await fetch(`${apiUrl}/v1/galleries`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/galleries`, {
         method: 'GET',
         headers: headers,
       })
