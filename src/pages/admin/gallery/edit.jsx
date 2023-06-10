@@ -67,9 +67,6 @@ export default function EditGallery() {
 
       console.log(process.env.API_KEY);
 
-      const { publicRuntimeConfig } = getConfig();
-      const apiUrl = publicRuntimeConfig.API_URL;
-
       // console.log(postData)
       const headers = {
         "Content-Type": "multipart/form-data",
@@ -77,7 +74,7 @@ export default function EditGallery() {
       };
 
       const response = await axios.put(
-        `${apiUrl}/v1/galleries/${id}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/v1/galleries/${id}`,
         postData,
         {
           headers: headers,
