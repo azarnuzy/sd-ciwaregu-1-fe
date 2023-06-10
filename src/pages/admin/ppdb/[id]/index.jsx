@@ -17,75 +17,81 @@ function DetailStudent() {
   const { token } = useAuth()
   const router = useRouter()
 
+  // console.log(router.query)
   useEffect(() => {
-    const getDetail = async () => {
-      await axios
-        .get(`${process.env.NEXT_PUBLIC_BASE_URL}/v1/ppdb/${router.query.id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          //   setData(response.data?.data)
-          const { data } = response.data
-          const {
-            noPendaftaran,
-            namaLengkap,
-            namaPanggilan,
-            jenisKelamin,
-            tempatLahir,
-            tanggalLahir,
-            agama,
-            tinggiBadan,
-            beratBadan,
-            alamat,
-            rt,
-            rw,
-            kelurahan,
-            kecamatan,
-            kabupaten,
-            provinsi,
-            kodePos,
-            noTelp,
-            asalMuasal,
-            sekolahAsal,
-            keluarga,
-            berkas,
-          } = data
-          //   console.log(response.data)
-          setData([
-            { label: 'No. Pendaftaran', value: noPendaftaran },
-            { label: 'Nama Lengkap', value: namaLengkap },
-            { label: 'Nama Panggilan', value: namaPanggilan },
-            { label: 'Jenis Kelamin', value: jenisKelamin },
-            { label: 'Tempat Lahir', value: tempatLahir },
-            { label: 'Tanggal Lahir', value: tanggalLahir },
-            { label: 'Agama', value: agama },
-            { label: 'Tinggi Badan', value: tinggiBadan + ' cm' },
-            { label: 'Berat Badan', value: beratBadan + ' kg' },
-            { label: 'Alamat', value: alamat },
-            { label: 'RT/RW', value: rt + '/' + rw },
-            { label: 'Kelurahan', value: kelurahan },
-            { label: 'Kecamatan', value: kecamatan },
-            { label: 'Kabupaten', value: kabupaten },
-            { label: 'Provinsi', value: provinsi },
-            { label: 'Kode Pos', value: kodePos },
-            { label: 'No. Telepon', value: noTelp },
-            { label: 'Asal Muasal', value: asalMuasal },
-            { label: 'Sekolah Asal', value: sekolahAsal },
-            { label: 'Kabupaten', value: kabupaten },
-            // { label: 'Keluarga', value: keluarga },
-            // { label: 'Berkas', value: berkas },
-          ])
-          setKeluarga(keluarga)
-          setBerkas(berkas)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
+    if (router.query.id) {
+      const getDetail = async () => {
+        await axios
+          .get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/v1/ppdb/${router.query.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+          .then((response) => {
+            //   setData(response.data?.data)
+            const { data } = response.data
+            const {
+              noPendaftaran,
+              namaLengkap,
+              namaPanggilan,
+              jenisKelamin,
+              tempatLahir,
+              tanggalLahir,
+              agama,
+              tinggiBadan,
+              beratBadan,
+              alamat,
+              rt,
+              rw,
+              kelurahan,
+              kecamatan,
+              kabupaten,
+              provinsi,
+              kodePos,
+              noTelp,
+              asalMuasal,
+              sekolahAsal,
+              keluarga,
+              berkas,
+            } = data
+            //   console.log(response.data)
+            setData([
+              { label: 'No. Pendaftaran', value: noPendaftaran },
+              { label: 'Nama Lengkap', value: namaLengkap },
+              { label: 'Nama Panggilan', value: namaPanggilan },
+              { label: 'Jenis Kelamin', value: jenisKelamin },
+              { label: 'Tempat Lahir', value: tempatLahir },
+              { label: 'Tanggal Lahir', value: tanggalLahir },
+              { label: 'Agama', value: agama },
+              { label: 'Tinggi Badan', value: tinggiBadan + ' cm' },
+              { label: 'Berat Badan', value: beratBadan + ' kg' },
+              { label: 'Alamat', value: alamat },
+              { label: 'RT/RW', value: rt + '/' + rw },
+              { label: 'Kelurahan', value: kelurahan },
+              { label: 'Kecamatan', value: kecamatan },
+              { label: 'Kabupaten', value: kabupaten },
+              { label: 'Provinsi', value: provinsi },
+              { label: 'Kode Pos', value: kodePos },
+              { label: 'No. Telepon', value: noTelp },
+              { label: 'Asal Muasal', value: asalMuasal },
+              { label: 'Sekolah Asal', value: sekolahAsal },
+              { label: 'Kabupaten', value: kabupaten },
+              // { label: 'Keluarga', value: keluarga },
+              // { label: 'Berkas', value: berkas },
+            ])
+            setKeluarga(keluarga)
+            setBerkas(berkas)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
 
-    getDetail()
+      getDetail()
+    }
   }, [router.query.id, token])
 
   return (
